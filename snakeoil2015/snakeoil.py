@@ -120,10 +120,10 @@ def bargraph(x, mn, mx, w, c='X'):
 
 
 class Client():
-    def __init__(self, H=None, p=None, i=None, e=None, t=None, s=None, d=None, f=None, P=None):
+    def __init__(self, H=None, p=None, i=None, e=None, t=None, s=None, d=None, f=None, P=None, port=3001):
         # If you don't like the option defaults,  change them here.
         self.host = 'localhost'
-        self.port = 3001
+        self.port = port
         self.sid = 'SCR'
         self.maxEpisodes = 1  # "Maximum number of learning episodes to perform"
         self.trackname = 'unknown'

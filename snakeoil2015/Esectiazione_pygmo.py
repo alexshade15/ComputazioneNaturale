@@ -3,10 +3,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-n_trials = 20
-p_size = 20
-n_gens = 2000
-D = 100
+n_trials = 2
+p_size = 10
+n_gens = 50
+D = 5
 
 pg.set_global_rng_seed(seed=32)
 
@@ -18,9 +18,9 @@ shift = np.linspace(np.pi*4, np.pi*4, D)
 prob1 = pg.translate(prob=prob, translation=shift)
 
 # For a number of generation based algorithms we can use a similar script to run and average over 25 runs.
-udas = [pg.sade(gen=n_gens, variant=6, variant_adptv=1, memory=False, seed=1234),
-        pg.de(gen=n_gens, variant=7, F=0.6, CR=0.9, seed=1234),
-        pg.pso(gen=n_gens, neighb_type=4, memory=True, seed=1234)]
+udas = [pg.sade(gen=n_gens, variant=6, variant_adptv=1, memory=False, seed=1234)]
+        #pg.de(gen=n_gens, variant=7, F=0.6, CR=0.9, seed=1234),
+        #pg.pso(gen=n_gens, neighb_type=4, memory=True, seed=1234)]
 
 global_results = []
 for uda in udas:

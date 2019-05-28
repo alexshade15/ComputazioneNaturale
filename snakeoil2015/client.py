@@ -2,6 +2,7 @@
 import sys
 import math
 import snakeoil
+import def_param
 
 target_speed = 0
 lap = 0
@@ -715,12 +716,12 @@ def initialize_car(c):
 
 
 #if __name__ == "__main__":
-def main(P):
+def main(P, port):
 
    #print "client started"
 
     T = Track()
-    C = snakeoil.Client(P=P)
+    C = snakeoil.Client(P=P, port=port)
 
 
     lastLapTime = []
@@ -766,3 +767,9 @@ def main(P):
     C.shutdown()
 
     return (lastLapTime, damages)
+if __name__ == "__main__":
+    main(def_param.believe, 3001) #1:45
+    #main(def_param.test1) #1:51
+    #main(def_param.test2) #1:51
+    #main(def_param.test3) #1:51
+    #main(def_param.test4) #1:51
