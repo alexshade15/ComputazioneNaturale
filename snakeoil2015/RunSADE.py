@@ -105,8 +105,6 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, in_pop=None):
     with open("def_param.py", 'a') as outfile:
         outfile.write(new_parameters + " = " + str(P))
         json.dump(P, outfile)
-        outfile.write("\n\nLONGOOOO\n\n")
-        outfile.write(new_parameters + " = " + str(pop.champion_x))
     with open(new_parameters + ".txt", 'w') as outfile:
         json.dump(P, outfile)
     # We then add details to the plot
