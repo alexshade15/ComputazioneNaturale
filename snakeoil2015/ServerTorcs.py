@@ -1,5 +1,6 @@
 import os
 from threading import Thread
+#import time
 
 
 class ServerTorcs(Thread):
@@ -9,8 +10,9 @@ class ServerTorcs(Thread):
 
     def run(self):
         os.chdir(r'C:\Users\alex\Desktop\torcs')
-        os.system('wtorcs.exe -t 1000000000 -T>nul 2>nul')
+        #print "SERVER",time.time()
+        os.system('wtorcs.exe -t 1000000000 -T >nul 2>nul')
 
 if __name__ == "__main__":
     os.chdir(r'C:\Users\alex\Desktop\torcs')
-    os.system('wtorcs.exe -t 1000000000 >nul 2>nul')
+    os.system('wtorcs.exe -t 1000000000')

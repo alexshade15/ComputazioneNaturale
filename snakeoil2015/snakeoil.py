@@ -56,6 +56,7 @@ import socket
 import json
 import sys
 import getopt
+#import time
 
 PI = 3.14159265359
 
@@ -178,6 +179,7 @@ class Client():
             sockdata = str()
             try:
                 sockdata, addr = self.so.recvfrom(1024)
+                #print "CLIENT",time.time()
             except socket.error, emsg:
                 # print "Waiting for server on %d............" % self.port
                 pass

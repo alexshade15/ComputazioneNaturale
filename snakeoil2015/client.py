@@ -744,7 +744,6 @@ def main(P, port):
         drive(C, T, step)
         C.respond_to_server()
 
-        # print (C.S.d['lastLapTime'])
         if (lastLapTime[i-1] != C.S.d['lastLapTime']):
             lastLapTime.append(C.S.d['lastLapTime'])
             damages.append(C.S.d['damage'])
@@ -759,11 +758,6 @@ def main(P, port):
     damages.append(C.S.d['damage'])
 
     lastLapTime.remove(0)
-
-    # for k in range(i):
-    #     print "------- lap ",k+1," -------"
-    #     print "laptime: ", lastLapTime[k]
-    #     print "damage: ", damages[k]
     C.shutdown()
 
     return (lastLapTime, damages)

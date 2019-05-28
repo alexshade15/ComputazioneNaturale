@@ -4,23 +4,24 @@ import pygmo as pg
 import numpy as np
 import client
 import ServerTorcs
-from def_param import default_parameters, believe
+from def_param import used_parameters, believe
 import matplotlib.pyplot as plt
+import time
 
 
 class myProblem:
-    def getDamagePerLap(self, damages):
-        damagesPerLap = [damages[0]]
-        for i in range(len(damages) - 1):
-            damagesPerLap.append(damages[i + 1] - damages[i])
-            if sum(damagesPerLap) < 100:
-                for i in range(len(damagesPerLap)):
-                    damagesPerLap[i] = 0
-        return damagesPerLap
+    # def getDamagePerLap(self, damages):
+    #     damagesPerLap = [damages[0]]
+    #     for i in range(len(damages) - 1):
+    #         damagesPerLap.append(damages[i + 1] - damages[i])
+    #         if sum(damagesPerLap)/3 <= 150:
+    #             for i in range(len(damagesPerLap)):
+    #                 damagesPerLap[i] = 0
+    #     return damagesPerLap
 
     def fitness(self, dv):
         i = 0
-        P = default_parameters
+        P = used_parameters
         for key in P:
             P[key] = dv[i]
             i = i + 1
@@ -28,18 +29,29 @@ class myProblem:
         server1 = ServerTorcs.ServerTorcs()
         server1.start()
         (lapTimes, damages) = client.main(P, 3001)
-        print "lastLapTime--->", lapTimes
-        print "damages--->", damages
 
-        damagePerLap = self.getDamagePerLap(damages)
+        print "\n", P
 
-        fitness1 = [lap + dmg / 2 for lap, dmg in zip(lapTimes, damagePerLap)]
-        fitness_mean_tot = sum(fitness1) / float(len(fitness1))
-        print "fitness--->", fitness1, "----- mean: ", fitness_mean_tot, "\n"
-        return [fitness_mean_tot]
+        if len(lapTimes)<2:
+            FAIL = '\033[91m'
+            print FAIL + "Timeout" + FAIL
+            return [10000]
+
+        print "lastLapTime--->", lapTimes[1]
+
+
+        damagePerLap = damages[1] - damages[0] #self.getDamagePerLap(damages)
+        print "damages--->", damagePerLap
+        # fitness1 = [lap + dmg / 2 for lap, dmg in zip(lapTimes, damagePerLap)]
+        # fitness_mean_tot = sum(fitness1) / float(len(fitness1))
+
+        fitness1 = lapTimes[1] + damagePerLap / 2
+        print "fitness--->", fitness1#, "----- mean: ", fitness_mean_tot, "\n"
+        #return [fitness_mean_tot]
+        return [fitness1]
 
     def get_bounds(self):
-        y = believe
+        y = used_parameters
         LOWER_VECTOR = []
         UPPER_VECTOR = []
         percent = 0.1
@@ -59,7 +71,7 @@ class myProblem:
 def mySADE(n_trials, n_gen, p_size, new_parameters, in_pop=None):
     prob = pg.problem(myProblem())
     print "Problem defined!"
-    uda = pg.sade(gen=n_gens, variant=18, variant_adptv=1, memory=False, seed=1234, ftol=1e-20, xtol=1e-20)
+    uda = pg.sade(gen=n_gen, variant=2, variant_adptv=1, memory=False, seed=1234, ftol=1e-20, xtol=1e-20)
     global_results = []
     logs = []
     algo = pg.algorithm(uda)
@@ -83,7 +95,7 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, in_pop=None):
 
     print("global results: ", global_results)
 
-    P = default_parameters
+    P = used_parameters
     i = 0
     for key in P:
         P[key] = pop.champion_x[i]
@@ -93,6 +105,8 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, in_pop=None):
     with open("def_param.py", 'a') as outfile:
         outfile.write(new_parameters + " = " + str(P))
         json.dump(P, outfile)
+        outfile.write("\n\nLONGOOOO\n\n")
+        outfile.write(new_parameters + " = " + str(pop.champion_x))
     with open(new_parameters + ".txt", 'w') as outfile:
         json.dump(P, outfile)
     # We then add details to the plot
@@ -102,8 +116,8 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, in_pop=None):
 
 if __name__ == "__main__":
     n_trials = 1
-    population_size = 15
-    n_gens = 200
+    population_size = 10
+    n_gens = 100
     pg.set_global_rng_seed(seed=42)
-    new_parameters = "Test28"
+    new_parameters = "Test28_after_prooning"
     mySADE(n_trials, n_gens, population_size, new_parameters)
