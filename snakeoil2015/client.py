@@ -762,7 +762,9 @@ def main(P, port):
 
     return (lastLapTime, damages)
 if __name__ == "__main__":
-    main(def_param.believe, 3001) #1:45
+    port = 3003
+    print port
+    main(def_param.dt7, port) #1:45
     #main(def_param.test1) #1:51
     #main(def_param.test2) #1:51
     #main(def_param.test3) #1:51
