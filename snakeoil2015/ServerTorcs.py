@@ -4,34 +4,16 @@ from threading import Thread
 
 
 class ServerTorcs(Thread):
+    port = ""
 
-    def __init__(self):
+    def __init__(self, port = ""):
         Thread.__init__(self)
+        self.port = port
 
     def run(self):
-        os.chdir(r'C:\Users\alex\Desktop\torcs')
+        os.chdir('C:\\Users\\alex\\Desktop\\torcs' + self.port)
         #print "SERVER",time.time()
-        os.system('wtorcs.exe -t 1000000000 -T >nul 2>nul')
-
-class ServerTorcs1(Thread):
-
-    def __init__(self):
-        Thread.__init__(self)
-
-    def run(self):
-        os.chdir(r'C:\Users\alex\Desktop\torcs2')
-        #print "SERVER",time.time()
-        os.system('wtorcs.exe -t 1000000000 -T >nul 2>nul')
-
-class ServerTorcs2(Thread):
-
-    def __init__(self):
-        Thread.__init__(self)
-
-    def run(self):
-        os.chdir(r'C:\Users\alex\Desktop\torcs3')
-        #print "SERVER",time.time()
-        os.system('wtorcs.exe -t 1000000000 -T >nul 2>nul')
+        os.system('wtorcs.exe -t 1000000000 -T >NUL')
 
 if __name__ == "__main__":
     os.chdir(r'C:\Users\alex\Desktop\torcs3')

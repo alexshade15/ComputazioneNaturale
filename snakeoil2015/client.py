@@ -67,6 +67,7 @@ class Track():
     def write_track(self, fn):
         firstline = "%f\n" % self.width
         f = open(fn + '.trackinfo', 'w')
+        print fn + '.trackinfo'
         f.write(firstline)
         for s in self.sectionList:
             ts = '%f %f %f %d\n' % (s.start, s.end, s.magnitude, s.badness)
@@ -715,27 +716,23 @@ def initialize_car(c):
     c.respond_to_server()
 
 
-#if __name__ == "__main__":
-def main(P, port):
-
-   #print "client started"
+def main(P, port, m=1):
 
     T = Track()
     C = snakeoil.Client(P=P, port=port)
 
-
     lastLapTime = []
     damages = []
+    distance = []
     i = 1
     lastLapTime.append(0)
-
-    if C.stage == 1 or C.stage == 2:
-        try:
-            T.load_track(C.trackname)
-        except:
-            print "Could not load the track: %s" % C.trackname
-            sys.exit()
-        print "Track loaded!"
+    # if C.stage == 1 or C.stage == 2:
+    #     try:
+    #         T.load_track(C.trackname)
+    #     except:
+    #         print "Could not load the track: %s" % C.trackname
+    #         sys.exit()
+    #     print "Track loaded!"
     initialize_car(C)
     C.S.d['stucktimer'] = 0
     C.S.d['targetSpeed'] = 0
@@ -744,28 +741,21 @@ def main(P, port):
         drive(C, T, step)
         C.respond_to_server()
 
-        if (lastLapTime[i-1] != C.S.d['lastLapTime']):
+        if (lastLapTime[i - 1] != C.S.d['lastLapTime']):
+            #print C.S.d['damage'], '---', C.S.d['lastLapTime']
             lastLapTime.append(C.S.d['lastLapTime'])
             damages.append(C.S.d['damage'])
+            distance.append(C.S.d['distRaced'])
             i = i + 1
-
-    if not C.stage:
-        T.write_track(C.trackname)
-    C.R.d['meta'] = 1
-    C.respond_to_server()
-
-    lastLapTime.append(C.S.d['curLapTime'])
-    damages.append(C.S.d['damage'])
-
+            if (len(lastLapTime) == 3) and m==1:
+                C.R.d['meta'] = 1
     lastLapTime.remove(0)
     C.shutdown()
 
-    return (lastLapTime, damages)
+    return (lastLapTime, damages, distance)
+
+
 if __name__ == "__main__":
     port = 3003
     print port
-    main(def_param.dt7, port) #1:45
-    #main(def_param.test1) #1:51
-    #main(def_param.test2) #1:51
-    #main(def_param.test3) #1:51
-    #main(def_param.test4) #1:51
+    main(def_param.dt7, port, m=0)
