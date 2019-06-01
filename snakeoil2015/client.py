@@ -754,7 +754,6 @@ def main(P, port, m=1):
             out = False
             if times_out > 25:
                 positions_out.append([max_out, times_out])
-                print "penalita"
             times_out = 0
             max_out = 0
 
@@ -784,14 +783,23 @@ if __name__ == "__main__":
     print port
     main(def_param.dt7, port, m=0)
 
+
+####### snakeoil (5laps) #######
 # snakeoil: (on 5 laps)
 # speedway_n1  45.52s
 # forza        1.52.64s  112.64s
 # corkscrew    1.54.60s  114.60s
 # alpine2      1.54.17s  114.17s
 
-# snakeoil: (on 5 laps)
-# speedway_n1  45.52s
-# forza        1.52.64s  112.64s
-# corkscrew    1.54.60s  114.60s
+######### dt7 (5laps) ##########
+# speedway_n1  44.27s
+# forza        1.50.19s  110.19s
+# corkscrew    1.51.15s  111.15s
 # alpine2      1.57.41s  117.41s
+
+############# BEST #############
+# speedway_n1  45.52s
+# forza        1.17.90s  77.90s
+# corkscrew    1.08.79s  68.79s
+# alpine2      1.19.03s  79.03s
+

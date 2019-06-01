@@ -14,7 +14,7 @@ from threading import Thread
 class myProblem:
     counter = 0
     track_distances = [  # 2057.56, # speedway_n1
-        3723.57,  # alpine2
+        3773.57,  # alpine2
         3608.45,  # corkscrew
         5784.10]  # forza
 

@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6095c2e7-0100-46c6-9d94-764c72f296b9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RunSADE.py" beforeDir="false" afterPath="$PROJECT_DIR$/RunSADE.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ServerTorcs.py" beforeDir="false" afterPath="$PROJECT_DIR$/ServerTorcs.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/client.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/def_param.py" beforeDir="false" afterPath="$PROJECT_DIR$/def_param.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/snakeoil.py" beforeDir="false" afterPath="$PROJECT_DIR$/snakeoil.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,11 +35,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="784" column="22" selection-start-line="784" selection-start-column="22" selection-end-line="784" selection-end-column="22" />
+            <state relative-caret-position="21">
+              <caret line="794" selection-start-line="794" selection-end-line="794" />
               <folding>
                 <element signature="e#18#28#0" expanded="true" />
                 <element signature="e#21807#21841#0" />
@@ -55,8 +51,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/def_param.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-140">
-              <caret line="134" selection-start-line="134" selection-end-line="134" />
+            <state relative-caret-position="342">
+              <caret line="355" selection-start-line="355" selection-end-line="355" />
               <folding>
                 <element signature="e#21#3869#0" />
                 <element signature="e#3888#5992#0" />
@@ -81,8 +77,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ServerTorcs.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="21">
-              <caret line="1" column="28" selection-start-line="1" selection-start-column="28" selection-end-line="1" selection-end-column="28" />
+            <state relative-caret-position="210">
+              <caret line="10" column="68" lean-forward="true" selection-start-line="10" selection-start-column="68" selection-end-line="10" selection-end-column="68" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -90,11 +86,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RunSADE.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="6" column="38" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
+            <state relative-caret-position="441">
+              <caret line="21" column="21" lean-forward="true" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
+              <folding>
+                <element signature="e#0#12#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -110,10 +109,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>lastlaptime---&gt; 4</find>
-      <find>last</find>
-      <find>lastlaptime---&gt; 44.1</find>
-      <find>cannot bind socket</find>
       <find>waitin</find>
       <find>lastlaptime</find>
       <find>lastlaptime---&gt; 44.6</find>
@@ -140,6 +135,10 @@
       <find>fitness---&gt; 2</find>
       <find>fitness---&gt; 91</find>
       <find>print</find>
+      <find>distance---&gt; 4</find>
+      <find>distance---&gt; 48</find>
+      <find>fitness---&gt; 8</find>
+      <find>fitness---&gt;</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -154,16 +153,16 @@
         <option value="$PROJECT_DIR$/TestSADE.py" />
         <option value="$PROJECT_DIR$/clientThread.py" />
         <option value="$PROJECT_DIR$/snakeoil.py" />
-        <option value="$PROJECT_DIR$/client.py" />
-        <option value="$PROJECT_DIR$/def_param.py" />
         <option value="$PROJECT_DIR$/ServerTorcs.py" />
         <option value="$PROJECT_DIR$/RunSADE.py" />
+        <option value="$PROJECT_DIR$/def_param.py" />
+        <option value="$PROJECT_DIR$/client.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="128" />
-    <option name="y" value="-30" />
+    <option name="x" value="560" />
+    <option name="y" value="-16" />
     <option name="width" value="2178" />
     <option name="height" value="2330" />
   </component>
@@ -364,21 +363,29 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1933" height="1173" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49915683" weight="0.1563981" />
       <window_info id="Structure" order="1" sideWeight="0.50084317" side_tool="true" weight="0.15653495" />
       <window_info id="Favorites" order="2" sideWeight="0.50110376" side_tool="true" weight="0.10163244" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32950193" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.4243295" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.73275864" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3994253" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32950193" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32950193" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32950193" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.39846742" />
@@ -498,21 +505,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client.py">
+    <entry file="file://$PROJECT_DIR$/RunSADE.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="784" column="22" selection-start-line="784" selection-start-column="22" selection-end-line="784" selection-end-column="22" />
+        <state relative-caret-position="441">
+          <caret line="21" column="21" lean-forward="true" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
           <folding>
-            <element signature="e#18#28#0" expanded="true" />
-            <element signature="e#21807#21841#0" />
+            <element signature="e#0#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/def_param.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-140">
-          <caret line="134" selection-start-line="134" selection-end-line="134" />
+        <state relative-caret-position="342">
+          <caret line="355" selection-start-line="355" selection-end-line="355" />
           <folding>
             <element signature="e#21#3869#0" />
             <element signature="e#3888#5992#0" />
@@ -535,18 +541,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ServerTorcs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="1" column="28" selection-start-line="1" selection-start-column="28" selection-end-line="1" selection-end-column="28" />
+        <state relative-caret-position="210">
+          <caret line="10" column="68" lean-forward="true" selection-start-line="10" selection-start-column="68" selection-end-line="10" selection-end-column="68" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RunSADE.py">
+    <entry file="file://$PROJECT_DIR$/client.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="6" column="38" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
+        <state relative-caret-position="21">
+          <caret line="794" selection-start-line="794" selection-end-line="794" />
+          <folding>
+            <element signature="e#18#28#0" expanded="true" />
+            <element signature="e#21807#21841#0" />
+          </folding>
         </state>
       </provider>
     </entry>
