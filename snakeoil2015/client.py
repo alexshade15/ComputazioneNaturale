@@ -3,6 +3,7 @@ import sys
 import math
 import snakeoil
 import def_param
+import time
 
 target_speed = 0
 lap = 0
@@ -717,13 +718,17 @@ def initialize_car(c):
 
 
 def main(P, port, m=1):
-
     T = Track()
     C = snakeoil.Client(P=P, port=port)
-
     lastLapTime = []
     damages = []
     distance = []
+
+    positions_out = []
+    times_out = 0
+    max_out = 0
+    out = False
+
     i = 1
     lastLapTime.append(0)
     # if C.stage == 1 or C.stage == 2:
@@ -738,24 +743,55 @@ def main(P, port, m=1):
     C.S.d['targetSpeed'] = 0
     for step in xrange(C.maxSteps, 0, -1):
         C.get_servers_input()
+
+        tp = abs(C.S.d['trackPos'])
+        if tp >= 0.95:
+            times_out += 1
+            out = True
+            if tp > max_out:
+                max_out = tp
+        if tp < 0.95 and out:
+            out = False
+            if times_out > 25:
+                positions_out.append([max_out, times_out])
+                print "penalita"
+            times_out = 0
+            max_out = 0
+
+        if C.so == None:
+            lastLapTime.remove(0)
+            return (lastLapTime, damages, distance, positions_out, port)
+
         drive(C, T, step)
         C.respond_to_server()
 
         if (lastLapTime[i - 1] != C.S.d['lastLapTime']):
-            #print C.S.d['damage'], '---', C.S.d['lastLapTime']
             lastLapTime.append(C.S.d['lastLapTime'])
             damages.append(C.S.d['damage'])
             distance.append(C.S.d['distRaced'])
+
             i = i + 1
-            if (len(lastLapTime) == 3) and m==1:
+            if (len(lastLapTime) == 3) and m == 1:
                 C.R.d['meta'] = 1
     lastLapTime.remove(0)
     C.shutdown()
-
-    return (lastLapTime, damages, distance)
+    print '----------------------------------------------------------'
+    return (lastLapTime, damages, distance, port)
 
 
 if __name__ == "__main__":
-    port = 3003
+    port = 3004
     print port
     main(def_param.dt7, port, m=0)
+
+# snakeoil: (on 5 laps)
+# speedway_n1  45.52s
+# forza        1.52.64s  112.64s
+# corkscrew    1.54.60s  114.60s
+# alpine2      1.54.17s  114.17s
+
+# snakeoil: (on 5 laps)
+# speedway_n1  45.52s
+# forza        1.52.64s  112.64s
+# corkscrew    1.54.60s  114.60s
+# alpine2      1.57.41s  117.41s

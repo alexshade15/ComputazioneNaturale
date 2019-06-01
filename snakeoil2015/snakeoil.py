@@ -253,7 +253,7 @@ class Client():
                 return
             elif '***restart***' in sockdata:
                 # What do I do here?
-                print "Server has restarted the race on %d." % self.port
+                #print "Server has restarted the race on %d." % self.port
                 # I haven't actually caught the server doing this.
                 self.shutdown()
                 return
