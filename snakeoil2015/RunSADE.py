@@ -52,30 +52,39 @@ class myProblem:
         while que.qsize() > 0:
             (lapT, dmg, dist, out, p) = que.get()
             index = p % 3001
-            if len(lapT) < 2:
+            # print "--lapT, dmg, dist-->", lapT, dmg, dist
+            if len(dmg) < 2 or dmg[len(dmg) - 1] > 10000:
                 races[index]['lapTime'] = 300
                 races[index]['damage'] = 10000
                 races[index]['distance'] = self.track_distances[index]
-                races[index]['out'] = [0.0, 0]
             else:
                 races[index]['lapTime'] = lapT[1]
                 races[index]['damage'] = self.getValuePerLap(dmg)
                 races[index]['distance'] = self.getValuePerLap(dist) - self.track_distances[index]
                 races[index]['out'] = out
 
+        print P
+        print "lastLapTime--->\t\t", races[0]['lapTime'], '\t\t\t', races[1]['lapTime'], '\t\t\t', races[2]['lapTime']
+        print "damages--->\t\t\t", races[0]['damage'], '\t\t\t', races[1]['damage'], '\t\t\t', races[2]['damage']
+        print "distance--->\t\t", races[0]['distance'], '\t\t\t', races[1]['distance'], '\t\t\t', races[2]['distance']
+        print "times out--->", races[0]['out']
+        print "times out--->", races[1]['out']
+        print "times out--->", races[2]['out']
+
+        # https://pyformat.info
+        # print 'lastLapTime--->{:06.2f}{:06.2f}{:06.2f}'.format(races[0]['lapTime'], races[1]['lapTime'], races[2]['lapTime'])
+
         fit = 0
         for race in races:
             fit += race['lapTime']
             fit += race['damage'] / 2
             fit += race['distance'] * 10
-            for elem in race['out']:
-                fit += round(elem[1]/25)*3
+            try:
+                for elem in race['out']:
+                    fit += round(elem[1] / 25) * 3
+            except:
+                print 'ops'
 
-        print P
-        print "lastLapTime--->", races[0]['lapTime'], '--', races[1]['lapTime'], '--', races[2]['lapTime']
-        print "damages--->", races[0]['damage'], '--', races[1]['damage'], '--', races[2]['damage']
-        print "distance--->", races[0]['distance'], '--', races[1]['distance'], '--', races[2]['distance']
-        print "times out--->", len(races[0]['out']), '--', len(races[1]['out']), '--', len(races[2]['out'])
         print "fitness--->", fit
 
         return [fit]
@@ -85,7 +94,7 @@ class myProblem:
         y = used_parameters
         LOWER_VECTOR = []
         UPPER_VECTOR = []
-        percent = 0.2
+        percent = 0.35
         for elem in y:
             if y[elem] > 0:
                 UPPER_VECTOR.append(y[elem] + y[elem] * percent)
@@ -99,7 +108,7 @@ class myProblem:
 def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers, in_pop=None):
     prob = pg.problem(myProblem())
     print "Problem defined!"
-    uda = pg.sade(gen=n_gen, variant=7, variant_adptv=1, memory=False, seed=1234, ftol=1e-6, xtol=1e-6)
+    uda = pg.sade(gen=n_gen, variant=18, variant_adptv=1, memory=False, seed=1234, ftol=1e-6, xtol=1e-6)
 
     global_results = []
     logs = []
@@ -158,8 +167,8 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers, in_pop=None):
 if __name__ == "__main__":
     n_trials = 1
     n_servers = 3
-    population_size = 10
-    n_gens = 1000
+    population_size = 15
+    n_gens = 500
     pg.set_global_rng_seed(seed=42)
     new_parameters = "Test01"
     mySADE(n_trials, n_gens, population_size, new_parameters, n_servers)

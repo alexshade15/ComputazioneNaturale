@@ -744,6 +744,25 @@ def main(P, port, m=1):
     for step in xrange(C.maxSteps, 0, -1):
         C.get_servers_input()
 
+        if C.S.d['damage'] > 9000 or C.S.d['curLapTime'] > 200:
+            damages.append(50000)
+            C.R.d['meta'] = 1
+            C.respond_to_server()
+            C.shutdown()
+            return (lastLapTime, damages, distance, positions_out, port)
+
+        if (lastLapTime[i - 1] != C.S.d['lastLapTime']):
+            lastLapTime.append(C.S.d['lastLapTime'])
+            damages.append(C.S.d['damage'])
+            distance.append(C.S.d['distRaced'])
+            i = i + 1
+            if (len(lastLapTime) == 3) and m == 1:
+                C.R.d['meta'] = 1
+                C.respond_to_server()
+                C.shutdown()
+                return (lastLapTime, damages, distance, positions_out, port)
+
+        # Tracking car positio
         tp = abs(C.S.d['trackPos'])
         if tp >= 0.95:
             times_out += 1
@@ -757,32 +776,15 @@ def main(P, port, m=1):
             times_out = 0
             max_out = 0
 
-        if C.so == None:
-            lastLapTime.remove(0)
-            return (lastLapTime, damages, distance, positions_out, port)
-
         drive(C, T, step)
+
         C.respond_to_server()
-
-        if (lastLapTime[i - 1] != C.S.d['lastLapTime']):
-            lastLapTime.append(C.S.d['lastLapTime'])
-            damages.append(C.S.d['damage'])
-            distance.append(C.S.d['distRaced'])
-
-            i = i + 1
-            if (len(lastLapTime) == 3) and m == 1:
-                C.R.d['meta'] = 1
-    lastLapTime.remove(0)
-    C.shutdown()
-    print '----------------------------------------------------------'
-    return (lastLapTime, damages, distance, port)
 
 
 if __name__ == "__main__":
     port = 3004
     print port
-    main(def_param.dt7, port, m=0)
-
+    main(def_param.dead, port, m=0)
 
 ####### snakeoil (5laps) #######
 # snakeoil: (on 5 laps)
@@ -802,4 +804,3 @@ if __name__ == "__main__":
 # forza        1.17.90s  77.90s
 # corkscrew    1.08.79s  68.79s
 # alpine2      1.19.03s  79.03s
-
