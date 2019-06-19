@@ -1,182 +1,78 @@
-import Queue
 import json
 import os
 import pygmo as pg
 import numpy as np
 import ServerTorcs
-from def_param import used_parameters, dt7
+from def_param import used_parameters_V3, dt7
 import matplotlib.pyplot as plt
 import time
-import client
-from threading import Thread
+from problems import myProblem, myProblemMultiobj
 
 
-class myProblem:
-    counter = 0
-    track_distances = [  # 2057.56, # speedway_n1
-        3773.57,  # alpine2
-        3608.45,  # corkscrew
-        5784.10]  # forza
+def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers):
 
-    def getValuePerLap(self, values):
-        # valueaPerLap = [values[0]]
-        # for i in range(len(values) - 1):
-        #     valueaPerLap.append(values[i + 1] - values[i])
-        return values[1] - values[0]
+    # uda = pg.sade(gen=n_gen, variant=7, variant_adptv=1, memory=False, seed=1234, ftol=1e-3, xtol=1e-3)
+    # pso from pygmo
+    udas = []
+    udas.append(pg.pso(gen=n_gen, omega=0.7298, eta1=2.05, eta2=2.05, max_vel=0.5, variant=5, neighb_type=2, memory=True,seed=1234))
+    udas.append(pg.pso(gen=n_gen, omega=0.7298, eta1=2.05, eta2=2.05, max_vel=0.5, variant=5, neighb_type=4, neighb_param=4, memory=False, seed=1234))
 
-    def fitness(self, dv):
-        self.counter += 1
-        i = 0
-        P = used_parameters
-        for key in P:
-            P[key] = dv[i]
-            i = i + 1
+    udas.append(pg.sade(gen=n_gen, variant=7, variant_adptv=1, memory=False, seed=1234, ftol=1e-3, xtol=1e-3))
+    udas.append(pg.sade(gen=n_gen, variant=8, variant_adptv=1, memory=False, seed=1234, ftol=1e-3, xtol=1e-3))
+    udas.append(pg.sade(gen=n_gen, variant=18, variant_adptv=1, memory=False, seed=1234, ftol=1e-3, xtol=1e-3))
+    # pso from slides
+    #udas.append(pg.pso(gen=n_gen, omega=0.7298, eta1=1.49618, eta2=1.49618, memory=True, seed=1234, max_vel=0.5, variant=5, neighb_type=2))
 
-        que = Queue.Queue()
-        threadsList = list()
-        clientCall = lambda P, port, que: que.put(client.main(P, port))
-
-        k = time.time()
-        # print "Starting clients"
-        for i in range(n_servers):
-            threadsList.append(Thread(target=clientCall, args=(P, 3001 + i, que)))
-            threadsList[i].start()
-        for elem in threadsList:
-            elem.join()
-        # print "Clients started"
-        print '\n\nFitness evaluation', self.counter, 'completed,', 'time:', int(time.time() - k)
-
-        races = [
-            {'lapTime': 0.0, 'damage': 0, 'distance': 0.0, 'out': []}  # ,
-            # {'lapTime': 0.0, 'damage': 0, 'distance': 0.0, 'out': []},
-            # {'lapTime': 0.0, 'damage': 0, 'distance': 0.0, 'out': []}
-        ]
-        while que.qsize() > 0:
-            (lapT, dmg, dist, out, p) = que.get()
-            index = p % 3001
-            # print "--lapT, dmg, dist-->", lapT, dmg, dist
-            if len(dmg) < 2 or dmg[len(dmg) - 1] > 10000:
-                races[index]['lapTime'] = 300
-                races[index]['damage'] = 10000
-                races[index]['distance'] = self.track_distances[index]
-            else:
-                races[index]['lapTime'] = lapT[1]
-                races[index]['damage'] = self.getValuePerLap(dmg)
-                races[index]['distance'] = self.getValuePerLap(dist) - self.track_distances[index]
-                races[index]['out'] = out
-
-        print P
-        print "lastLapTime--->\t\t", races[0][
-            'lapTime']  # , '\t\t\t', races[1]['lapTime'], '\t\t\t', races[2]['lapTime']
-        print "damages--->\t\t\t", races[0]['damage']  # , '\t\t\t', races[1]['damage'], '\t\t\t', races[2]['damage']
-        print "distance--->\t\t", races[0][
-            'distance']  # , '\t\t\t', races[1]['distance'], '\t\t\t', races[2]['distance']
-        print "times out--->", races[0]['out']
-        # print "times out--->", races[1]['out']
-        # print "times out--->", races[2]['out']
-
-        # https://pyformat.info
-        # print 'lastLapTime--->{:06.2f}{:06.2f}{:06.2f}'.format(races[0]['lapTime'], races[1]['lapTime'], races[2]['lapTime'])
-
-        fit = 0
-        for race in races:
-            fit += race['lapTime']
-            fit += race['damage'] / 2
-            #fit += race['distance'] * 2
-            try:
-                for elem in race['out']:
-                    fit += round(elem[1] / 25) * 3
-            except:
-                print 'ops'
-
-        print "fitness--->", fit
-
-        return [fit]
-
-    def get_bounds(self):
-        # y = used_parameters
-        # LOWER_VECTOR = []
-        # UPPER_VECTOR = []
-        # percent = 0.2
-        # for elem in y:
-        #     if y[elem] > 0:
-        #         if elem.find("upsh") >= 0:
-        #             UPPER_VECTOR.append(8500)
-        #             LOWER_VECTOR.append(7000)
-        #         else:
-        #             UPPER_VECTOR.append(y[elem] + y[elem] * percent)
-        #             LOWER_VECTOR.append(y[elem] - y[elem] * percent)
-        #     if y[elem] < 0:
-        #         UPPER_VECTOR.append(y[elem] - y[elem] * percent)
-        #         LOWER_VECTOR.append(y[elem] + y[elem] * percent)
-
-        LOWER_VECTOR = [22.330815872857627, 5614.605941043081, 5986.776871504111, 0.008026482300333666, 7000,
-                        5050.431685110512, 76.24572132458489, 395.5263053795649, 7000, 0.11506992973132205,
-                        72.27280555463622, 0.0010240735395158046, 7000, 0.800212258250127, 16.056655090139678,
-                        3.589638607984429, 0.08203371994963192, 3210.80289108826, 1.0739729440962804, 56.68049896907322,
-                        7000, 40.232828137849374, 0.6558988653824718, 8.826791931115067e-05, 27.095024174143408,
-                        1.8334869462989367, 0.05269365193578934, 0.041140715625661586, 0.8001913587465144,
-                        0.4090768635474715, 0.5143395342173982, 7000, 263.3229267204907, 0.014438238586841654,
-                        12.866615857699983, 1.2032546474912722, 0.4416162307497723, 0.4612933555838736,
-                        8.634847048502987, 0.6843422135022108, 0.8306734961830431, -1.0821849487609525,
-                        1.3959893211650618, 551.9643493006105, 1.7940525501071138, 2.4035456773550536,
-                        1.757156059937844, 0.7601691520252325, 1.335379829520909, 5944.248392867027]
-        UPPER_VECTOR = [33.49622380928644, 8421.908911564622, 8980.165307256168, 0.012039723450500497, 9000,
-                        7575.647527665769, 114.36858198687735, 593.2894580693473, 9000, 0.17260489459698306,
-                        108.40920833195435, 0.001536110309273707, 9000, 1.2003183873751906, 24.084982635209514,
-                        5.384457911976644, 0.12305057992444789, 4816.204336632391, 1.6109594161444207,
-                        85.02074845360983, 9000, 60.34924220677406, 0.9838482980737076, 0.00013240187896672602,
-                        40.64253626121511, 2.750230419448405, 0.07904047790368401, 0.06171107343849237,
-                        1.2002870381197714, 0.6136152953212073, 0.7715093013260974, 9000, 394.98439008073615,
-                        0.02165735788026248, 19.299923786549975, 1.8048819712369084, 0.6624243461246585,
-                        0.6919400333758103, 12.952270572754479, 1.026513320253316, 1.2460102442745646,
-                        -0.7214566325073017, 2.0939839817475927, 827.9465239509158, 2.691078825160671,
-                        3.6053185160325802, 2.635734089906766, 1.1402537280378489, 2.003069744281363, 8916.372589300541]
-
-        return (LOWER_VECTOR, UPPER_VECTOR)
-
-
-def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers, in_pop=None):
-    prob = pg.problem(myProblem())
-    print "Problem defined!"
-    uda = pg.sade(gen=n_gen, variant=18, variant_adptv=1, memory=False, seed=1234, ftol=1e-6, xtol=1e-6)
+    # #MULTIOBJ UDAS
+    # udas.append(
+    #     pg.moead(gen=n_gen, weight_generation="grid", decomposition="tchebycheff", neighbours=20, CR=1, F=.9, eta_m=20))
+    # udas.append(
+    #     pg.moead(gen=n_gen, weight_generation="low discrepancy", decomposition="tchebycheff", neighbours=20, CR=1,
+    #              F=.9, eta_m=20,))
+    # udas.append(
+    #     pg.moead(gen=n_gen, weight_generation="grid", decomposition="weighted", neighbours=20, CR=1, F=.9, eta_m=20))
+    # udas.append(
+    #     pg.moead(gen=n_gen, weight_generation="low discrepancy", decomposition="weighted", neighbours=20, CR=1,
+    #              F=.9, eta_m=20))
 
     global_results = []
-    logs = []
-    algo = pg.algorithm(uda)
-    results_trial = []
+    for index, uda in enumerate(udas):
+        logs = []
+        algo = pg.algorithm(uda)
+        results_trial = []
 
-    print "Starting servers"
-    servers = []
-    for i in range(n_servers):
-        servers.append(ServerTorcs.ServerTorcs(port=3001 + i))
-        servers[i].start()
-        time.sleep(.5)
-    print "Servers started"
+        print "Starting servers"
+        servers = []
+        for i in range(n_servers):
+            servers.append(ServerTorcs.ServerTorcs(port=3001 + i))
+            servers[i].start()
+            time.sleep(.5)
+        print "Servers started"
 
-    time.sleep(20)
+        time.sleep(1)
+        print ('uda:', index)
 
-    for i in range(0, n_trials):
-        log_trial = []
-        algo.set_verbosity(9)
-        if in_pop:
-            pop = in_pop
-        else:
-            pop = pg.population(prob, p_size, seed=1234)
-        algo.evolve(pop)
-        log_trial.append(algo.extract(type(uda)).get_log())
-        log_trial = np.array(log_trial)
-        results_trial.append(np.min(log_trial[:, log_trial.shape[1] - 1, 2]))
+        for i in range(0, n_trials):
+            prob1 = pg.problem(myProblem(n_servers, index))
+            # prob1 = pg.problem(myProblemMultiobj(n_servers, index))
 
-    logs.append(algo.extract(type(uda)).get_log())
-    logs = np.array(logs)
-    avg_log = np.average(logs, 0)
-    global_results.append(np.min(results_trial, 0))
-    plt.plot(avg_log[:, 1], avg_log[:, 2], label=algo.get_name())
+            log_trial = []
+            algo.set_verbosity(9)
+            pop = pg.population(prob1, p_size, seed=i+index)
+            algo.evolve(pop)
+            log_trial.append(algo.extract(type(uda)).get_log())
+            log_trial = np.array(log_trial)
+            results_trial.append(np.min(log_trial[:, log_trial.shape[1] - 1, 2]))
+
+        logs.append(algo.extract(type(uda)).get_log())
+        logs = np.array(logs)
+        avg_log = np.average(logs, 0)
+        global_results.append(np.min(results_trial, 0))
+        plt.plot(avg_log[:, 1], avg_log[:, 2], label=algo.get_name()+str(index))
 
     print("global results: ", global_results)
 
-    P = used_parameters
+    P = used_parameters_V3
     i = 0
     for key in P:
         P[key] = pop.champion_x[i]
@@ -198,8 +94,8 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers, in_pop=None):
 if __name__ == "__main__":
     n_trials = 1
     n_servers = 1
-    population_size = 10
-    n_gens = 200
-    pg.set_global_rng_seed(seed=42)
-    new_parameters = "Test03"
+    population_size = 15
+    n_gens = 300
+    pg.set_global_rng_seed(seed=27)
+    new_parameters = "TestPSO_parameter_by_pygomo"
     mySADE(n_trials, n_gens, population_size, new_parameters, n_servers)

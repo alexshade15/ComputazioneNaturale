@@ -1,9 +1,9 @@
 #!/usr/bin/python
 import sys
 import math
-import snakeoil
 import def_param
-import time
+import snakeoil
+from threading import Thread
 
 target_speed = 0
 lap = 0
@@ -34,11 +34,11 @@ class Track():
         o += "\nLap Length: %s\n" % self.laplength
         return o
 
-    def post_process_track(self, T):
+    def post_process_track(self):
         ws = [round(s.width) for s in self.sectionList]
-        ws = filter(lambda O: O, ws)
+        ws = filter(lambda O: O, ws)  #??????
         ws.sort()
-        self.width = ws[len(ws) / 2]
+        self.width = ws[len(ws) / 2] #width del track: width al centro !?
         cleanedlist = list()
         TooShortToBeASect = 6
         for n, s in enumerate(self.sectionList):
@@ -59,7 +59,7 @@ class Track():
                     nextS.dist = nextS.end - nextS.start
                     nextS.apex = nextS.dist / 2 + nextS.start
                 else:
-                    prevS.end = T.laplength
+                    prevS.end = self.laplength
                     prevS.dist = prevS.end - prevS.start
                     prevS.apex = prevS.dist / 2 + prevS.start
         self.sectionList = cleanedlist
@@ -68,7 +68,6 @@ class Track():
     def write_track(self, fn):
         firstline = "%f\n" % self.width
         f = open(fn + '.trackinfo', 'w')
-        print fn + '.trackinfo'
         f.write(firstline)
         for s in self.sectionList:
             ts = '%f %f %f %d\n' % (s.start, s.end, s.magnitude, s.badness)
@@ -87,6 +86,7 @@ class Track():
         self.usable_model = True
 
     def section_in_now(self, d):
+        '''ritorna la sezione in ci si trova attualmente, altrimenti None'''
         for s in self.sectionList:
             if s.start < d < s.end:
                 return s
@@ -94,6 +94,7 @@ class Track():
             return None
 
     def section_ahead(self, d):
+        '''ritorna la sezione successiva a quella in ci si trova attualmente, altrimenti None'''
         for n, s in enumerate(self.sectionList):
             if s.start < d < s.end:
                 if n < len(self.sectionList) - 1:
@@ -104,6 +105,7 @@ class Track():
             return None
 
     def record_badness(self, b, d):
+        '''Salva la badness della sezione corrente'''
         sn = self.section_in_now(d)
         if sn:
             sn.badness += b
@@ -119,7 +121,7 @@ class TrackSection():
         self.end = sEnd
         self.dist = self.end - self.start
         if not self.dist: self.dist = .1
-        self.apex = self.start + self.dist / 2
+        self.apex = self.start + self.dist / 2   # centro della section (?)
         self.magnitude = sMag
         self.width = sWidth
         self.severity = self.magnitude / self.dist
@@ -129,20 +131,22 @@ class TrackSection():
         tt = ['Right', 'Straight', 'Left'][self.direction + 1]
         o = "S: %f  " % self.start
         o += "E: %f  " % self.end
-        o += "L: %f  " % (self.end - self.start)
+        o += "L: %f  " % (self.end - self.start) #length
         o += "Type: %s  " % tt
         o += "M: %f " % self.magnitude
         o += "B: %f " % self.badness
         return o
 
+    # unused and not implemented...
     def update(self, distFromStart, trackPos, steer, angle, z):
         pass
 
+    # unused
     def current_section(self, x):
         return self.begin <= x and x <= self.end
 
 
-def automatic_transimission(P, r, g, c, rpm, sx, ts, tick):
+def automatic_transimission(P, g, c, rpm, sx, ts, tick):
     clutch_releaseF = .05
     ng, nc = g, c
     if ts < 0 and g > -1:
@@ -211,7 +215,7 @@ def find_slip(wsv_list):
 def track_sensor_analysis(t, a):
     alpha = 0
     sense = 1
-    farthest = None, None
+    #farthest = None, None
     ps = list()
     realt = list()
     sangsradang = [(math.pi * X / 180.0) + a for X in sangs]
@@ -237,23 +241,23 @@ def track_sensor_analysis(t, a):
         if beforePdist > afterPdist:
             sense = -1
             outsideset = ls
-            insideset = rs
+            #insideset = rs
             ls.append(ps[farthest])
         else:
             outsideset = rs
-            insideset = ls
+            #insideset = ls
             rs.append(ps[farthest])
     else:
         if ps[0][0] > ps[-1][0]:
             ps.reverse()
-            farthest = (len(ps) - 1) - farthest
+            #farthest = (len(ps) - 1) - farthest
         if ps[0][1] > ps[-1][1]:
             sense = -1
             outsideset = ls
-            insideset = rs
+            #insideset = rs
         else:
             outsideset = rs
-            insideset = ls
+            #insideset = ls
     maxpdist = 0
     if not outsideset:
         return (0, a, 2)
@@ -479,7 +483,10 @@ def throttle_control(P, ai, ts, sx, sl, sy, ang, steer):
         else:
             ts = min(ts, okmaxspeed4steer)
         tooslow = ts - sx
-    ao = 2 / (1 + math.exp(-tooslow)) - 1
+    try:
+        ao = 2 / (1 + math.exp(-tooslow)) - 1
+    except:
+        print "you are a bad boy"
     ao -= abs(sl) * P['slipdec']
     spincut = P['spincutint'] - P['spincutslp'] * abs(sy)
     spincut = snakeoil.clip(spincut, P['spincutclip'], 1)
@@ -498,7 +505,6 @@ def brake_control(P, bi, sx, sy, ts, sk):
     if toofast < 0:
         return 0
     if toofast:
-        bo += P['brake'] * toofast / max(1, abs(sk))
         bo = 1
     if sk > P['seriousABS']: bo = 0
     if sx < 0: bo = 0
@@ -544,7 +550,7 @@ def car_is_stuck(sx, t, a, p, fwdtsen, ts):
     return True
 
 
-def learn_track(st, a, t, dfs, T):
+def learn_track(T, st, a, t, dfs):
     global secType
     global secBegin
     global secMagnitude
@@ -575,13 +581,30 @@ def learn_track(st, a, t, dfs, T):
         secWidth = t[0] + t[-1]
 
 
-def learn_track_final(dfs, T):
+def learn_track_final(T, dfs):
     global secType
     global secBegin
     global secMagnitude
     global secWidth
     global badness
     T.sectionList.append(TrackSection(secBegin, dfs, secMagnitude, secWidth, badness))
+
+
+
+# target_speed = 0
+# lap = 0
+# prev_distance_from_start = 1
+# learn_final = False
+# opHistory = list()
+# trackHistory = [0]
+# TRACKHISTORYMAX = 50
+# secType = 0
+# secBegin = 0
+# secMagnitude = 0
+# secWidth = 0
+# sangs = [-45, -19, -12, -7, -4, -2.5, -1.7, -1, -.5, 0, .5, 1, 1.7, 2.5, 4, 7, 12, 19, 45]
+# sangsrad = [(math.pi * X / 180.0) for X in sangs]
+# badness = 0
 
 
 def drive(c, T, tick):
@@ -613,19 +636,14 @@ def drive(c, T, tick):
     if target_speed > 0:
         if c.stage:
             if not S['stucktimer']:
-                target_speed = speed_planning(P, S['distFromStart'], S['track'], S['trackPos'],
-                                              S['speedX'], S['speedY'], R['steer'], S['angle'],
-                                              infleX, infleA)
+                target_speed = speed_planning(P, S['distFromStart'], S['track'], S['trackPos'], S['speedX'], S['speedY'], R['steer'], S['angle'], infleX, infleA)
             target_speed += jump_speed_adjustment(S['z'])
             if c.stage > 1:
-                target_speed += traffic_speed_adjustment(
-                    S['opponents'], S['speedX'], target_speed, S['track'])
+                target_speed += traffic_speed_adjustment( S['opponents'], S['speedX'], target_speed, S['track'])
             target_speed *= damage_speed_adjustment(S['damage'])
         else:
             if lap > 1 and T.usable_model:
-                target_speed = speed_planning(P, S['distFromStart'], S['track'], S['trackPos'],
-                                              S['speedX'], S['speedY'], R['steer'], S['angle'],
-                                              infleX, infleA)
+                target_speed = speed_planning(P, S['distFromStart'], S['track'], S['trackPos'], S['speedX'], S['speedY'], R['steer'], S['angle'], infleX, infleA)
                 target_speed *= damage_speed_adjustment(S['damage'])
             else:
                 target_speed = 50
@@ -649,8 +667,7 @@ def drive(c, T, tick):
             s = steer_centeralign(P, R['steer'], S['trackPos'], S['angle'])
             badness += 1
         else:
-            s = steer_reactive(P, R['steer'], S['trackPos'], S['angle'], S['track'],
-                               S['speedX'], infleX, infleA, straightness)
+            s = steer_reactive(P, R['steer'], S['trackPos'], S['angle'], S['track'], S['speedX'], infleX, infleA, straightness)
     else:
         s = steer_centeralign(P, R['steer'], S['trackPos'], S['angle'])
     R['steer'] = s
@@ -662,21 +679,16 @@ def drive(c, T, tick):
             target_speed *= snakeoil.clip(S['opponents'][0] / 20, .1, 1)
             target_speed *= snakeoil.clip(S['opponents'][35] / 20, .1, 1)
         else:
-            R['steer'] = speed_appropriate_steer(P,
-                                                 traffic_navigation(S['opponents'], R['steer']),
-                                                 S['speedX'] + 50)
+            R['steer'] = speed_appropriate_steer(P, traffic_navigation(S['opponents'], R['steer']), S['speedX'] + 50)
     if not S['stucktimer']:
         target_speed = abs(target_speed)
     slip = find_slip(S['wheelSpinVel'])
-    R['accel'] = throttle_control(P, R['accel'], target_speed, S['speedX'], slip,
-                                  S['speedY'], S['angle'], R['steer'])
+    R['accel'] = throttle_control(P, R['accel'], target_speed, S['speedX'], slip, S['speedY'], S['angle'], R['steer'])
     if R['accel'] < .01:
         R['brake'] = brake_control(P, R['brake'], S['speedX'], S['speedY'], target_speed, skid)
     else:
         R['brake'] = 0
-    R['gear'], R['clutch'] = automatic_transimission(P,
-                                                     S['rpm'], S['gear'], R['clutch'], S['rpm'], S['speedX'],
-                                                     target_speed, tick)
+    R['gear'], R['clutch'] = automatic_transimission(P, S['gear'], R['clutch'], S['rpm'], S['speedX'], target_speed, tick)
     R['clutch'] = clutch_control(P, R['clutch'], slip, S['speedX'], S['speedY'], S['gear'])
     if S['distRaced'] < S['distFromStart']:
         lap = 0
@@ -686,18 +698,18 @@ def drive(c, T, tick):
     if not lap:
         T.laplength = max(S['distFromStart'], T.laplength)
     elif lap == 1 and not T.usable_model:
-        learn_track(R['steer'], S['angle'], S['track'], S['distFromStart'], T)
+        learn_track(T, R['steer'], S['angle'], S['track'], S['distFromStart'])
     elif c.stage == 3:
         pass
     else:
         if not learn_final:
-            learn_track_final(T.laplength, T)
-            T.post_process_track(T)
+            learn_track_final(T, T.laplength)
+            T.post_process_track()
             learn_final = True
-        if T.laplength:
-            properlap = S['distRaced'] / T.laplength
-        else:
-            properlap = 0
+        # if T.laplength:
+        #     properlap = S['distRaced'] / T.laplength
+        # else:
+        #     properlap = 0
         if c.stage == 0 and lap < 4:
             T.record_badness(badness, S['distFromStart'])
     S['targetSpeed'] = target_speed
@@ -712,7 +724,7 @@ def initialize_car(c):
     R['steer'] = 0
     R['brake'] = 1
     R['clutch'] = 1
-    R['accel'] = .22
+    R['accel'] = 1
     R['focus'] = 0
     c.respond_to_server()
 
@@ -729,40 +741,32 @@ def main(P, port, m=1):
     max_out = 0
     out = False
 
-    i = 1
     lastLapTime.append(0)
-    # if C.stage == 1 or C.stage == 2:
-    #     try:
-    #         T.load_track(C.trackname)
-    #     except:
-    #         print "Could not load the track: %s" % C.trackname
-    #         sys.exit()
-    #     print "Track loaded!"
+
+    if C.stage == 1 or C.stage == 2:
+        try:
+            T.load_track(C.trackname)
+        except:
+            print "Could not load the track: %s" % C.trackname
+            sys.exit()
+        print "Track loaded!"
+
     initialize_car(C)
+    C.respond_to_server()
     C.S.d['stucktimer'] = 0
     C.S.d['targetSpeed'] = 0
+    # gear = 0
     for step in xrange(C.maxSteps, 0, -1):
         C.get_servers_input()
+        drive(C, T, step)
+        C.respond_to_server()
 
-        if C.S.d['damage'] > 9000 or C.S.d['curLapTime'] > 200:
-            damages.append(50000)
-            C.R.d['meta'] = 1
-            C.respond_to_server()
-            C.shutdown()
-            return (lastLapTime, damages, distance, positions_out, port)
+        # print C.S.d['rpm']
+        #
+        # if gear != C.S.d['gear']:
+        #     print 'Cambio marcia da', gear, 'a', C.S.d['gear']
+        #     gear = C.S.d['gear']
 
-        if (lastLapTime[i - 1] != C.S.d['lastLapTime']):
-            lastLapTime.append(C.S.d['lastLapTime'])
-            damages.append(C.S.d['damage'])
-            distance.append(C.S.d['distRaced'])
-            i = i + 1
-            if (len(lastLapTime) == 3) and m == 1:
-                C.R.d['meta'] = 1
-                C.respond_to_server()
-                C.shutdown()
-                return (lastLapTime, damages, distance, positions_out, port)
-
-        # Tracking car positio
         tp = abs(C.S.d['trackPos'])
         if tp >= 0.95:
             times_out += 1
@@ -776,15 +780,34 @@ def main(P, port, m=1):
             times_out = 0
             max_out = 0
 
-        drive(C, T, step)
+        if (lastLapTime[len(lastLapTime) - 1] != C.S.d['lastLapTime']):
+            lastLapTime.append(C.S.d['lastLapTime'])
+            damages.append(C.S.d['damage'])
+            distance.append(C.S.d['distRaced'])
+            if (len(lastLapTime) == 3) and m == 1:
+                C.R.d['meta'] = 1
+                C.respond_to_server()
+                C.shutdown()
+                return lastLapTime, damages, distance, positions_out, port
 
-        C.respond_to_server()
+        if C.S.d['damage'] > 9000 or C.S.d['curLapTime'] > 200:
+            damages.append(50000)
+            C.R.d['meta'] = 1
+            C.respond_to_server()
+            C.shutdown()
+            return lastLapTime, damages, distance, positions_out, port
+
+
+
+
+    if not C.stage:
+        T.write_track(C.trackname)
 
 
 if __name__ == "__main__":
     port = 3004
     print port
-    main(def_param.dead, port, m=0)
+    main(def_param.used_parameters, port, m=0)
 
 ####### snakeoil (5laps) #######
 # snakeoil: (on 5 laps)
@@ -792,15 +815,18 @@ if __name__ == "__main__":
 # forza        1.52.64s  112.64s
 # corkscrew    1.54.60s  114.60s
 # alpine2      1.54.17s  114.17s
+# E-track      1.53.41s
 
 ######### dt7 (5laps) ##########
 # speedway_n1  44.27s
 # forza        1.50.19s  110.19s
 # corkscrew    1.51.15s  111.15s
 # alpine2      1.57.41s  117.41s
+# E-track
 
 ############# BEST #############
 # speedway_n1  45.52s
 # forza        1.17.90s  77.90s
 # corkscrew    1.08.79s  68.79s
 # alpine2      1.19.03s  79.03s
+# E-track      1.14.88s  74.88s

@@ -121,13 +121,13 @@ def bargraph(x, mn, mx, w, c='X'):
 
 
 class Client():
-    def __init__(self, H=None, p=None, i=None, e=None, t=None, s=None, d=None, f=None, P=None, port=3001):
+    def __init__(self, H=None, p=None, i=None, e=None, t=None, s=None, d=None, f=None, P=None, port=3001, trackname='unknown'):
         # If you don't like the option defaults,  change them here.
         self.host = 'localhost'
         self.port = port
         self.sid = 'SCR'
         self.maxEpisodes = 1  # "Maximum number of learning episodes to perform"
-        self.trackname = 'unknown'
+        self.trackname = trackname
         self.stage = 3  # 0=Warm-up, 1=Qualifying 2=Race, 3=unknown <Default=3>
         self.debug = False
         self.maxSteps = 100000  # 50steps/second
