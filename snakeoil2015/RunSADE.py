@@ -36,18 +36,19 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers):
     #              F=.9, eta_m=20))
 
     global_results = []
+
+    print "Starting servers"
+    servers = []
+    for i in range(n_servers):
+        servers.append(ServerTorcs.ServerTorcs(port=3001 + i))
+        servers[i].start()
+        time.sleep(.5)
+    print "Servers started"
+
     for index, uda in enumerate(udas):
         logs = []
         algo = pg.algorithm(uda)
         results_trial = []
-
-        print "Starting servers"
-        servers = []
-        for i in range(n_servers):
-            servers.append(ServerTorcs.ServerTorcs(port=3001 + i))
-            servers[i].start()
-            time.sleep(.5)
-        print "Servers started"
 
         time.sleep(1)
         print ('uda:', index)
@@ -94,8 +95,8 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers):
 if __name__ == "__main__":
     n_trials = 1
     n_servers = 1
-    population_size = 15
-    n_gens = 300
+    population_size = 20
+    n_gens = 500
     pg.set_global_rng_seed(seed=27)
     new_parameters = "TestPSO_parameter_by_pygomo"
     mySADE(n_trials, n_gens, population_size, new_parameters, n_servers)

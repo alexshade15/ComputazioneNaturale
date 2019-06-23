@@ -790,7 +790,7 @@ def main(P, port, m=1):
                 C.shutdown()
                 return lastLapTime, damages, distance, positions_out, port
 
-        if C.S.d['damage'] > 9000 or C.S.d['curLapTime'] > 200:
+        if C.S.d['damage'] > 8000 or C.S.d['curLapTime'] > 200:
             damages.append(50000)
             C.R.d['meta'] = 1
             C.respond_to_server()
