@@ -3,7 +3,7 @@ import os
 import pygmo as pg
 import numpy as np
 import ServerTorcs
-from def_param import used_parameters_V3, dt7
+from def_param import used_parameters_V6
 import matplotlib.pyplot as plt
 import time
 from problems import myProblem, myProblemMultiobj
@@ -14,8 +14,8 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers):
     # uda = pg.sade(gen=n_gen, variant=7, variant_adptv=1, memory=False, seed=1234, ftol=1e-3, xtol=1e-3)
     # pso from pygmo
     udas = []
-    udas.append(pg.pso(gen=n_gen, omega=0.7298, eta1=2.05, eta2=2.05, max_vel=0.5, variant=5, neighb_type=2, memory=True,seed=1234))
-    udas.append(pg.pso(gen=n_gen, omega=0.7298, eta1=2.05, eta2=2.05, max_vel=0.5, variant=5, neighb_type=4, neighb_param=4, memory=False, seed=1234))
+    # udas.append(pg.pso(gen=n_gen, omega=0.7298, eta1=2.05, eta2=2.05, max_vel=0.5, variant=5, neighb_type=2, memory=True,seed=1234))
+    # udas.append(pg.pso(gen=n_gen, omega=0.7298, eta1=2.05, eta2=2.05, max_vel=0.5, variant=5, neighb_type=4, neighb_param=4, memory=False, seed=1234))
 
     udas.append(pg.sade(gen=n_gen, variant=7, variant_adptv=1, memory=False, seed=1234, ftol=1e-3, xtol=1e-3))
     udas.append(pg.sade(gen=n_gen, variant=8, variant_adptv=1, memory=False, seed=1234, ftol=1e-3, xtol=1e-3))
@@ -73,7 +73,7 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers):
 
     print("global results: ", global_results)
 
-    P = used_parameters_V3
+    P = used_parameters_V6
     i = 0
     for key in P:
         P[key] = pop.champion_x[i]
@@ -94,7 +94,7 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers):
 
 if __name__ == "__main__":
     n_trials = 1
-    n_servers = 1
+    n_servers = 3
     population_size = 20
     n_gens = 500
     pg.set_global_rng_seed(seed=27)

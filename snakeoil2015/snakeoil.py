@@ -79,12 +79,13 @@ version = "20130505-2"
 
 
 def clip(v, lo, hi):
-    if v < lo:
-        return lo
-    elif v > hi:
-        return hi
-    else:
-        return v
+    return max(lo, min(hi, v))
+    # if v < lo:
+    #     return lo
+    # elif v > hi:
+    #     return hi
+    # else:
+    #     return v
 
 
 def bargraph(x, mn, mx, w, c='X'):
