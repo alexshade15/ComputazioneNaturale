@@ -35,9 +35,9 @@ class Track():
 
     def post_process_track(self):
         ws = [round(s.width) for s in self.sectionList]
-        ws = filter(lambda O: O, ws)  #??????
+        ws = filter(lambda O: O, ws)  # ??????
         ws.sort()
-        self.width = ws[len(ws) / 2] #width del track: width al centro !?
+        self.width = ws[len(ws) / 2]  # width del track: width al centro !?
         cleanedlist = list()
         TooShortToBeASect = 6
         for n, s in enumerate(self.sectionList):
@@ -120,7 +120,7 @@ class TrackSection():
         self.end = sEnd
         self.dist = self.end - self.start
         if not self.dist: self.dist = .1
-        self.apex = self.start + self.dist / 2   # centro della section (?)
+        self.apex = self.start + self.dist / 2  # centro della section (?)
         self.magnitude = sMag
         self.width = sWidth
         self.severity = self.magnitude / self.dist
@@ -130,7 +130,7 @@ class TrackSection():
         tt = ['Right', 'Straight', 'Left'][self.direction + 1]
         o = "S: %f  " % self.start
         o += "E: %f  " % self.end
-        o += "L: %f  " % (self.end - self.start) #length
+        o += "L: %f  " % (self.end - self.start)  # length
         o += "Type: %s  " % tt
         o += "M: %f " % self.magnitude
         o += "B: %f " % self.badness
@@ -203,7 +203,7 @@ class TrackSection():
 #
 
 def automatic_transimission(P, g, c, rpm, sx, ts, tick):
-    clutch_releaseF = .05
+    clutch_releaseF = .15
     ng, nc = g, c
     if ts < 0 and g > -1:
         ng = -1
@@ -219,33 +219,33 @@ def automatic_transimission(P, g, c, rpm, sx, ts, tick):
                 ng = -1
             else:
                 ng = 1
-    elif not tick % 50 and sx > 20:
+    elif not tick % 25 and sx > 20:
         pass
-    elif g == 6 and rpm < 5200:
+    elif g == 6 and rpm < 5500:
         ng = g - 1
         nc = 1
-    elif g == 5 and rpm < 5000:
+    elif g == 5 and rpm < 5300:
         ng = g - 1
         nc = 1
-    elif g == 4 and rpm < 4800:
+    elif g == 4 and rpm < 5000:
         ng = g - 1
         nc = 1
     elif g == 3 and rpm < 4700:
         ng = g - 1
         nc = 1
-    elif g == 2 and rpm < 4700:
+    elif g == 2 and rpm < 4400:
         ng = g - 1
         nc = 1
-    elif g == 5 and rpm > 8800:
+    elif g == 5 and rpm > 8600:
         ng = g + 1
         nc = 1
-    elif g == 4 and rpm > 8600:
+    elif g == 4 and rpm > 8500:
         ng = g + 1
         nc = 1
-    elif g == 3 and rpm > 8500:
+    elif g == 3 and rpm > 8400:
         ng = g + 1
         nc = 1
-    elif g == 2 and rpm > 8300:
+    elif g == 2 and rpm > 8200:
         ng = g + 1
         nc = 1
     elif g == 1 and rpm > 8000:
@@ -257,7 +257,6 @@ def automatic_transimission(P, g, c, rpm, sx, ts, tick):
     else:
         pass
     return ng, nc
-
 
 
 def find_slip(wsv_list):
@@ -297,23 +296,23 @@ def track_sensor_analysis(t, a):
         if beforePdist > afterPdist:
             sense = -1
             outsideset = ls
-            #insideset = rs
+            # insideset = rs
             ls.append(ps[farthest])
         else:
             outsideset = rs
-            #insideset = ls
+            # insideset = ls
             rs.append(ps[farthest])
     else:
         if ps[0][0] > ps[-1][0]:
             ps.reverse()
-            #farthest = (len(ps) - 1) - farthest
+            # farthest = (len(ps) - 1) - farthest
         if ps[0][1] > ps[-1][1]:
             sense = -1
             outsideset = ls
-            #insideset = rs
+            # insideset = rs
         else:
             outsideset = rs
-            #insideset = ls
+            # insideset = ls
     maxpdist = 0
     if not outsideset:
         return (0, a, 2)
@@ -441,8 +440,8 @@ def traffic_speed_adjustment(os, sx, ts, tsen):
 
 
 def steer_centeralign(P, tp, a, ttp=0):
-    pointing_ahead = abs(a) < 2.1964 #P['pointingahead'] #  "margine di sicurezza"
-    onthetrack = abs(tp) < 1.2 #P['sortofontrack']   ### dipende dal circuito
+    pointing_ahead = abs(a) < 2.1964  # P['pointingahead'] #  "margine di sicurezza"
+    onthetrack = abs(tp) < 1.2  # P['sortofontrack']   ### dipende dal circuito
     offrd = 1
     if not onthetrack:
         offrd = P['offroad']
@@ -461,6 +460,7 @@ def speed_appropriate_steer(P, sto, sx):
     else:
         stmax = 1
     return snakeoil.clip(sto, -stmax, stmax)
+
 
 def steer_reactive(P, tp, a, t, sx, infleA, str8ness):
     if abs(a) > .6:
@@ -534,7 +534,9 @@ def throttle_control(P, ai, ts, sx, sl, sy, ang, steer):
     try:
         ao = 2 / (1 + math.exp(-tooslow)) - 1
     except:
-        print "exp overflow"
+        print "exp overflow:", -tooslow
+        ao = -1
+
     ao -= abs(sl) * P['slipdec']
     spincut = P['spincutint'] - P['spincutslp'] * abs(sy)
     spincut = snakeoil.clip(spincut, P['spincutclip'], 1)
@@ -638,7 +640,6 @@ def learn_track_final(T, dfs):
     T.sectionList.append(TrackSection(secBegin, dfs, secMagnitude, secWidth, badness))
 
 
-
 # target_speed = 0
 # lap = 0
 # prev_distance_from_start = 1
@@ -685,19 +686,20 @@ def drive(c, T, tick):
     infleX, infleA, straightness = track_sensor_analysis(S['track'], S['angle'])
     if target_speed > 0:
         # if c.stage:
-            if not S['stucktimer']:
-                target_speed = speed_planning(P, S['track'], S['speedX'], S['speedY'], R['steer'], S['angle'], infleX, infleA)
-            target_speed += jump_speed_adjustment(S['z'])
-            #if c.stage > 1:
-            # ---- target_speed += traffic_speed_adjustment( S['opponents'], S['speedX'], target_speed, S['track'])
-            target_speed *= damage_speed_adjustment(S['damage'])
-        # else:
-        #     print 'c.stage never equal to zero'
-        #     if lap > 1 and T.usable_model:
-        #         target_speed = speed_planning(P, S['distFromStart'], S['track'], S['trackPos'], S['speedX'], S['speedY'], R['steer'], S['angle'], infleX, infleA)
-        #         target_speed *= damage_speed_adjustment(S['damage'])
-        #     else:
-        #         target_speed = 50
+        if not S['stucktimer']:
+            target_speed = speed_planning(P, S['track'], S['speedX'], S['speedY'], R['steer'], S['angle'], infleX,
+                                          infleA)
+        target_speed += jump_speed_adjustment(S['z'])
+        # if c.stage > 1:
+        # ---- target_speed += traffic_speed_adjustment( S['opponents'], S['speedX'], target_speed, S['track'])
+        target_speed *= damage_speed_adjustment(S['damage'])
+    # else:
+    #     print 'c.stage never equal to zero'
+    #     if lap > 1 and T.usable_model:
+    #         target_speed = speed_planning(P, S['distFromStart'], S['track'], S['trackPos'], S['speedX'], S['speedY'], R['steer'], S['angle'], infleX, infleA)
+    #         target_speed *= damage_speed_adjustment(S['damage'])
+    #     else:
+    #         target_speed = 50
     target_speed = min(target_speed, 333)
     # caution = 1
     # if T.usable_model:
@@ -714,7 +716,7 @@ def drive(c, T, tick):
     #                 if snext.badness > 1000: caution = .75
     #                 if snext.badness > 10000: caution = .5
     # target_speed *= caution
-    #if T.usable_model or c.stage > 1:
+    # if T.usable_model or c.stage > 1:
     if abs(S['trackPos']) > 1:
         s = steer_centeralign(P, S['trackPos'], S['angle'])
         # badness += 1
@@ -729,8 +731,8 @@ def drive(c, T, tick):
     # if c.stage > 1:
     R['steer'] = s
     if target_speed < 0:
-        #------ target_speed *= snakeoil.clip(S['opponents'][0] / 20, .1, 1)
-        #------ target_speed *= snakeoil.clip(S['opponents'][35] / 20, .1, 1)
+        # ------ target_speed *= snakeoil.clip(S['opponents'][0] / 20, .1, 1)
+        # ------ target_speed *= snakeoil.clip(S['opponents'][35] / 20, .1, 1)
         if S['stucktimer'] and S['distRaced'] > 20:
             R['steer'] = -S['angle']
     # else:
@@ -744,7 +746,8 @@ def drive(c, T, tick):
         R['brake'] = brake_control(P, R['brake'], S['speedX'], S['speedY'], target_speed, skid)
     else:
         R['brake'] = 0
-    R['gear'], R['clutch'] = automatic_transimission(P, S['gear'], R['clutch'], S['rpm'], S['speedX'], target_speed, tick)
+    R['gear'], R['clutch'] = automatic_transimission(P, S['gear'], R['clutch'], S['rpm'], S['speedX'], target_speed,
+                                                     tick)
     R['clutch'] = clutch_control(P, R['clutch'], slip, S['speedX'], S['speedY'])
     # if S['distRaced'] < S['distFromStart']:
     #     lap = 0
@@ -815,6 +818,7 @@ def main(P, port, m=1):
     C.S.d['stucktimer'] = 0
     C.S.d['targetSpeed'] = 0
     # gear = 0
+    lap = 1
     for step in xrange(C.maxSteps, 0, -1):
         C.get_servers_input()
         drive(C, T, step)
@@ -826,21 +830,23 @@ def main(P, port, m=1):
         #     print 'Cambio marcia da', gear, 'a', C.S.d['gear']
         #     gear = C.S.d['gear']
 
-
-        tp = abs(C.S.d['trackPos'])
-        if tp >= 0.95:
-            times_out += 1
-            out = True
-            if tp > max_out:
-                max_out = tp
-        if tp < 0.95 and out:
-            out = False
-            if times_out > 25:
-                positions_out.append([max_out, times_out])
-            times_out = 0
-            max_out = 0
+        if lap == 2:
+            tp = abs(C.S.d['trackPos'])
+            if tp >= 0.95:
+                times_out += 1
+                out = True
+                if tp > max_out:
+                    max_out = tp
+            if tp < 0.95 and out:
+                out = False
+                if times_out > 25:
+                    # print "out", [max_out, times_out]
+                    positions_out.append([max_out, times_out])
+                times_out = 0
+                max_out = 0
 
         if (lastLapTime[len(lastLapTime) - 1] != C.S.d['lastLapTime']):
+            lap = 2
             lastLapTime.append(C.S.d['lastLapTime'])
             damages.append(C.S.d['damage'])
             distance.append(C.S.d['distRaced'])
@@ -848,6 +854,7 @@ def main(P, port, m=1):
                 C.R.d['meta'] = 1
                 C.respond_to_server()
                 C.shutdown()
+
                 return lastLapTime, damages, distance, positions_out, port
 
         if C.S.d['damage'] > 8000 or C.S.d['curLapTime'] > 200:
@@ -857,17 +864,27 @@ def main(P, port, m=1):
             C.shutdown()
             return lastLapTime, damages, distance, positions_out, port
 
-
-
-
     if not C.stage:
         T.write_track(C.trackname)
 
 
 if __name__ == "__main__":
-    port = 3005
+    port = 3004
     print port
-    main(def_param.dt7, port, m=0)
+    par = {'seriousABS': 18.572278222386533, 'safeatanyspeed': 0.002060391388847591, 'ignoreinfleA': 1.8618974032266842,
+           'carmaxvisib': 2.996281012911541, 'sxappropriatest2': 0.6915872114893653, 'clutchspin': 65.76649224108006,
+           'fullstis': 1.392560073959177, 'backontracksx': 105.82341286599376, 'offroad': 1.5595908595638819,
+           'consideredstr8': 0.01490247151823319, 'wheeldia': 0.25776785651051376, 'slipdec': 0.008427959807821133,
+           'fullstmaxsx': 6.842454237804415, 'st': 757.0689003343408, 'carmin': 53.72284196802518,
+           'sxappropriatest1': 19.92997091677259, 'oksyp': 10.266787818551606, 'wwlim': 3.309819636861068,
+           'sycon2': 1.175293684910017, 'spincutclip': 0.05952907186871913, 's2cen': 0.35858001046562926,
+           'sycon1': 0.6014722357964999, 'brakingpacefast': 1.7651811793889665, 'backward': 1.982552195440424,
+           'obviousbase': 55.23196014694696, 'spincutint': 2.700169505538187, 'stC': 416.61294427108675,
+           'stst': 175.6662371794496, 'damage': 4.514608172374178, 'timesout': 0.7339606012009418,
+           'spincutslp': 0.06366452905665826, 'brakingpaceslow': 3.0543067018137866, 's2sen': 1.6284672741342163,
+           'obvious': 2.086033855908092, 'str8thresh': 0.04456850252159655, 'steer2edge': 0.7690023210954672,
+           'clutchslip': 37.04190793722127, 'skidsev1': 0.7400827508572864}
+    main(par, port, m=0)
 
 ####### snakeoil (5laps) #######
 # snakeoil: (on 5 laps)

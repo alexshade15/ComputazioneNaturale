@@ -851,20 +851,6 @@ TestPSO_parameter_by_pygomo4 = {'seriousABS': 12.07542861922415, 'dnsh3rpm': 577
                                 'sortofontrack': 2.5121800450425997, 'steer2edge': 1.2595504035783198,
                                 'backward': 0.6381775035124411, 'dnsh4rpm': 4867.223003372334}
 
-omega = {"seriousABS": 39.24229938766773,'skidsev1': 0.7293705719677526, "senslim": 0.006660394248463853,
-         "fullstis": 0.6734865811863352, "consideredstr8": 0.49731508572271965, "carmin": 46.07068182168395,
-         "carmaxvisib": 3.783600088593208, "oksyp": 0.471014987306369, "slipdec": 0.012645889714834904,
-         "sycon2": 0.51797799635969, "s2cen": 0.21583966099414115, "sycon1": 1.2389863638133087,
-         "sxappropriatest2": 0.38179786664512133, "stst": 224.0820635864317, "spincutslp": 0.03162267724915859,
-         "str8thresh": 0.2123857122456918, "clutch_release": 0.062011056107600826, "clutchspin": 51.65202572925723,
-         "safeatanyspeed": 0.002193726997701581, "sxappropriatest1": 20.633734330603808, "stC": 981.0997206955651,
-         "ignoreinfleA": 20.66291277812629, "offroad": 0.8818078976568309, "sortofontrack": 2.751569945991889,
-         "fullstmaxsx": 33.91804687064625, "brakingpacefast": 2.496227557407688, "wwlim": 5.862619984938184,
-         "spincutclip": 0.1250825878610867, "clutchslip": 121.10460328125788, "spincutint": 1.84505105235883,
-         "st": 694.3079635285878, "brakingpaceslow": 4.341295573156362, "s2sen": 3.4863663641211025,
-         "obvious": 1.1667162779850306, "backontracksx": 8.756745238323102, "pointingahead": 1.2553200363856651,
-         "steer2edge": 2.3906490976188164, "backward": 1.8536343806433506, "wheeldia": 0.85542776687776345,
-         'dnsh1rpm': 5000, 'dnsh2rpm': 5000, 'dnsh3rpm': 5000, 'dnsh4rpm': 5000, 'dnsh5rpm': 5000,
-         'upsh2rpm': 8500, 'upsh3rpm': 8500, 'upsh4rpm': 8500, 'upsh5rpm': 8500, 'upsh6rpm': 8500,
-         'obviousbase': 95.66077216485036
-         }
+
+
+

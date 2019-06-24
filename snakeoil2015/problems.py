@@ -52,8 +52,8 @@ class myProblem:
 
         races = [
             {'lapTime': 0.0, 'damage': 0, 'distance': 0.0, 'out': []},
-            {'lapTime': 0.0, 'damage': 0, 'distance': 0.0, 'out': []},
-            {'lapTime': 0.0, 'damage': 0, 'distance': 0.0, 'out': []}
+            # {'lapTime': 0.0, 'damage': 0, 'distance': 0.0, 'out': []},
+            # {'lapTime': 0.0, 'damage': 0, 'distance': 0.0, 'out': []}
         ]
 
         try:
@@ -64,25 +64,25 @@ class myProblem:
                 if len(dmg) < 2 or dmg[len(dmg) - 1] > 10000:
                     races[index]['lapTime'] = 300
                     races[index]['damage'] = 10000
-                    races[index]['distance'] = self.track_distances[index]
+                    # races[index]['distance'] = self.track_distances[index]
                 else:
-                    races[index]['lapTime'] = lapT[1]
+                    races[index]['lapTime'] = lapT[2]
                     races[index]['damage'] = self.getValuePerLap(dmg)
-                    races[index]['distance'] = self.getValuePerLap(dist) - self.track_distances[index]
+                    # races[index]['distance'] = self.getValuePerLap(dist) - self.track_distances[index]
                     races[index]['out'] = out
         except:
-            print 'grrr'
+            print 'exception, queue size:', que.qsize()
 
         print P
         print "lastLapTime---> ", races[0][
-            'lapTime'], ' -- ', races[1]['lapTime'], ' -- ', races[2]['lapTime']  # , ' -- ', races[3]['lapTime']
+            'lapTime']#, ' -- ', races[1]['lapTime'], ' -- ', races[2]['lapTime']  # , ' -- ', races[3]['lapTime']
         print "damages---> ", races[0][
-            'damage'], ' -- ', races[1]['damage'], ' -- ', races[2]['damage']  # , ' -- ', races[3]['damage']
+            'damage']#, ' -- ', races[1]['damage'], ' -- ', races[2]['damage']  # , ' -- ', races[3]['damage']
         # print "distance---> ", races[0][
         #     'distance']  # , ' --- ', races[1]['distance'], ' --- ', races[2]['distance'], ' --- ', races[3]['distance']
         print "times out--->", races[0]['out']
-        print "times out--->", races[1]['out']
-        print "times out--->", races[2]['out']
+        # print "times out--->", races[1]['out']
+        # print "times out--->", races[2]['out']
         # print "times out--->", races[3]['out']
         print 'damage:', dv[28], 'out', dv[29]
 
@@ -96,7 +96,10 @@ class myProblem:
             # fit += race['distance'] * dv[25]
             try:
                 for elem in race['out']:
-                    fit += round(elem[1] * dv[29])
+                    if elem[1] < 30 or elem[0] < 1:
+                        fit += round(elem[1] * dv[29]/2)
+                    else:
+                        fit += round(elem[1] * dv[29])
             except:
                 print 'ops'
 
@@ -114,10 +117,10 @@ class myProblem:
         #     if y[elem] > 0:
         #         if elem.find("damage") >= 0:
         #             UPPER_VECTOR.append(10)
-        #             LOWER_VECTOR.append(0)
+        #             LOWER_VECTOR.append(0.00000001)
         #         elif elem.find("timesout") >= 0:
         #             UPPER_VECTOR.append(1)
-        #             LOWER_VECTOR.append(0)
+        #             LOWER_VECTOR.append(0.00000001)
         #         else:
         #             UPPER_VECTOR.append(y[elem] + y[elem] * percent)
         #             LOWER_VECTOR.append(y[elem] - y[elem] * percent)
@@ -182,7 +185,7 @@ class myProblem:
                         6.02124565880238, 206.98663098772897, 10.160634065303778, 4.824980946637494, 4.824980946637494,
                         1.3461144779941612, 0.3000717595299429, 0.030762644981111975, 0.15340382383030182,
                         0.19287732533152435, 0.31150256106864116, 0.5007674360703409, 28.59214549671934,
-                        0.5234959954368983, 98.74609752018404, 148.3223645173369, 0, 0, 0.015427768359623097,
+                        0.5234959954368983, 98.74609752018404, 148.3223645173369, 0.00000001, 0, 0.015427768359623097,
                         0.6727697062901679, 0.9013296290081452, 0.40273985403610524, 0.04315122364924577,
                         0.28506343200946227, 27.102302082988587, 0.17298500834395264]
         UPPER_VECTOR = [47.452983729822456, 0.0021761562714710846, 2.1146570942533636, 3.8961597608852405,
@@ -218,7 +221,7 @@ class myProblemMultiobj:
         return values[1] - values[0]
 
     def get_nobj(self):
-        return 4
+        return 3
 
     def fitness(self, dv):
         self.counter += 1
@@ -264,8 +267,8 @@ class myProblemMultiobj:
             'lapTime']  # , ' -- ', races[1]['lapTime']#, ' -- '#, races[2]['lapTime']#, ' -- ', races[3]['lapTime']
         print "damages---> ", races[0][
             'damage']  # , ' -- ', races[1]['damage']#, ' -- '#, races[2]['damage']#, ' -- ', races[3]['damage']
-        print "distance---> ", races[0][
-            'distance']  # , ' --- ', races[1]['distance'], ' --- ', races[2]['distance'], ' --- ', races[3]['distance']
+        # print "distance---> ", races[0][
+        #     'distance']  # , ' --- ', races[1]['distance'], ' --- ', races[2]['distance'], ' --- ', races[3]['distance']
         print "times out--->", races[0]['out']
         # print "times out--->", races[1]['out']
         # print "times out--->", races[2]['out']
