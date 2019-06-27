@@ -14,14 +14,16 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers):
     # uda = pg.sade(gen=n_gen, variant=7, variant_adptv=1, memory=False, seed=1234, ftol=1e-3, xtol=1e-3)
     # pso from pygmo
     udas = []
-    # udas.append(pg.pso(gen=n_gen, omega=0.7298, eta1=2.05, eta2=2.05, max_vel=0.5, variant=5, neighb_type=2, memory=True,seed=1234))
-    # udas.append(pg.pso(gen=n_gen, omega=0.7298, eta1=2.05, eta2=2.05, max_vel=0.5, variant=5, neighb_type=4, neighb_param=4, memory=False, seed=1234))
+    udas.append(pg.pso(gen=n_gen, omega=0.7298, eta1=2.05, eta2=2.05, max_vel=0.5, variant=5, neighb_type=2, memory=True,seed=1234))
+    udas.append(pg.pso(gen=n_gen, omega=0.7298, eta1=2.05, eta2=2.05, max_vel=0.5, variant=5, neighb_type=4, neighb_param=4, memory=False, seed=1234))
+
+    # pso from slides
+    udas.append(pg.pso(gen=n_gen, omega=0.7298, eta1=1.49618, eta2=1.49618, memory=True, seed=1234, max_vel=0.5, variant=5, neighb_type=2))
 
     udas.append(pg.sade(gen=n_gen, variant=7, variant_adptv=1, memory=False, seed=1234, ftol=1e-3, xtol=1e-3))
     udas.append(pg.sade(gen=n_gen, variant=8, variant_adptv=1, memory=False, seed=1234, ftol=1e-3, xtol=1e-3))
     udas.append(pg.sade(gen=n_gen, variant=18, variant_adptv=1, memory=False, seed=1234, ftol=1e-3, xtol=1e-3))
-    # pso from slides
-    #udas.append(pg.pso(gen=n_gen, omega=0.7298, eta1=1.49618, eta2=1.49618, memory=True, seed=1234, max_vel=0.5, variant=5, neighb_type=2))
+
 
     # #MULTIOBJ UDAS
     # udas.append(
@@ -58,7 +60,7 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers):
             # prob1 = pg.problem(myProblemMultiobj(n_servers, index))
 
             log_trial = []
-            algo.set_verbosity(9)
+            algo.set_verbosity(1)
             pop = pg.population(prob1, p_size, seed=i+index)
             algo.evolve(pop)
             log_trial.append(algo.extract(type(uda)).get_log())
@@ -70,6 +72,18 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers):
         avg_log = np.average(logs, 0)
         global_results.append(np.min(results_trial, 0))
         plt.plot(avg_log[:, 1], avg_log[:, 2], label=algo.get_name()+str(index))
+
+        P = used_parameters_V6
+        i = 0
+        for key in P:
+            P[key] = pop.champion_x[i]
+            i = i + 1
+
+        with open(new_parameters + str(index) + ".txt", 'w') as outfile:
+            json.dump(P, outfile)
+
+        with open("log" + algo.get_name() + '_' + str(time.time()) + '_' + str(index) + ".txt", 'w') as outfile:
+            json.dump(algo.extract(type(uda)).get_log(), outfile)
 
     print("global results: ", global_results)
 
