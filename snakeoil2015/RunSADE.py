@@ -3,7 +3,7 @@ import os
 import pygmo as pg
 import numpy as np
 import ServerTorcs
-from def_param import used_parameters_V6
+from def_param import new_param
 import matplotlib.pyplot as plt
 import time
 from problems import myProblem, myProblemMultiobj
@@ -73,7 +73,7 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers):
         global_results.append(np.min(results_trial, 0))
         plt.plot(avg_log[:, 1], avg_log[:, 2], label=algo.get_name()+str(index))
 
-        P = used_parameters_V6
+        P = new_param
         i = 0
         for key in P:
             P[key] = pop.champion_x[i]
@@ -87,7 +87,7 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers):
 
     print("global results: ", global_results)
 
-    P = used_parameters_V6
+    P = new_param
     i = 0
     for key in P:
         P[key] = pop.champion_x[i]

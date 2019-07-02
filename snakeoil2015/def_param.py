@@ -103,7 +103,7 @@ used_parameters_V3 = {
     'brakingpaceslow': 2.2425656876338924, 's2sen': 3.0044320966938169, 'pointingahead': 2.196445074922305,
     'steer2edge': 0.95021144003154068, 'backward': 1.6692247869011361, 'dnsh4rpm': 7430.3104910837837}
 
-used_parameters_V4 = {  #no distance
+used_parameters_V4 = {  # no distance
     'seriousABS': 27.913519841072034, 'dnsh3rpm': 7018.2574263038514, 'dnsh5rpm': 7483.4710893801393,
     'consideredstr8': 0.010033102875417081, 'upsh6rpm': 11914.502728729563, 'dnsh2rpm': 6313.0396063881408,
     'obviousbase': 95.307151655731118, 'stst': 494.40788172445616, 'timesout': 1,
@@ -122,7 +122,7 @@ used_parameters_V4 = {  #no distance
     'brakingpaceslow': 2.2425656876338924, 's2sen': 3.0044320966938169, 'pointingahead': 2.196445074922305,
     'steer2edge': 0.95021144003154068, 'backward': 1.6692247869011361, 'dnsh4rpm': 7430.3104910837837}
 
-used_parameters_V5 = {  #no: backontracksx, pointingahead, sortofontrack
+used_parameters_V5 = {  # no: backontracksx, pointingahead, sortofontrack
     'seriousABS': 27.913519841072034, 'dnsh3rpm': 7018.2574263038514, 'dnsh5rpm': 7483.4710893801393,
     'consideredstr8': 0.010033102875417081, 'upsh6rpm': 11914.502728729563, 'dnsh2rpm': 6313.0396063881408,
     'obviousbase': 95.307151655731118, 'stst': 494.40788172445616, 'timesout': 1,
@@ -141,15 +141,13 @@ used_parameters_V5 = {  #no: backontracksx, pointingahead, sortofontrack
     'brakingpaceslow': 2.2425656876338924, 's2sen': 3.0044320966938169,
     'steer2edge': 0.95021144003154068, 'backward': 1.6692247869011361, 'dnsh4rpm': 7430.3104910837837}
 
-used_parameters_V6 = {  #no: rmp
-    'seriousABS': 27.913519841072034,
-    'consideredstr8': 0.010033102875417081,
+used_parameters_V6 = {  # no: rmp
+    'seriousABS': 27.913519841072034, 'consideredstr8': 0.010033102875417081,
     'obviousbase': 95.307151655731118, 'stst': 494.40788172445616, 'timesout': 1,
     'str8thresh': 0.14383741216415255, 'clutchslip': 90.341006943295284,
     'safeatanyspeed': 0.0012800919243947557, 'offroad': 1.0002653228126588,
     'fullstmaxsx': 20.070818862674596, 'wwlim': 4.4870482599805364, 'spincutclip': 0.1025421499370399,
-    'obvious': 1.3424661801203506, 'backontracksx': 70.850623711341527,
-    'clutchspin': 50.291035172311716,
+    'obvious': 1.3424661801203506, 'clutchspin': 50.291035172311716,
     'fullstis': 0.81987358172808966, 'carmin': 33.868780217679259, 'carmaxvisib': 2.2918586828736709,
     'oksyp': 16.083269822124979, 'spincutslp': 0.051425894532076979, 'sycon2': 1.0002391984331429,
     's2cen': 0.51134607943433941, 'sycon1': 0.6429244177717478,
@@ -160,6 +158,20 @@ used_parameters_V6 = {  #no: rmp
     'brakingpaceslow': 2.2425656876338924, 's2sen': 3.0044320966938169,
     'steer2edge': 0.95021144003154068, 'backward': 1.6692247869011361}
 
+new_param = {
+    'seriousABS': 27.913519841072034, 'safeatanyspeed': 0.0012800919243947557,
+    'carmaxvisib': 2.2918586828736709, 'sxappropriatest2': 0.5520202884372154, 'clutchspin': 50.291035172311716,
+    'fullstis': 0.81987358172808966, 'ignoreinfleA': 1.2439159377960962, 'offroad': 1.0002653228126588,
+    'consideredstr8': 0.010033102875417081, 'wheeldia': 0.85542776687776345, 'slipdec': 0.018047798233552067,
+    'fullstmaxsx': 20.070818862674596, 'st': 689.95543662576313, 'carmin': 33.868780217679259,
+    'sxappropriatest1': 16.083269822124979, 'oksyp': 16.083269822124979, 'wwlim': 4.4870482599805364,
+    'sycon2': 1.0002391984331429, 'spincutclip': 0.1025421499370399, 's2cen': 0.51134607943433941,
+    'sycon1': 0.6429244177717478, 'brakingpacefast': 1.0383418702288039, 'backward': 1.6692247869011361,
+    'obviousbase': 95.307151655731118, 'spincutint': 1.7449866514563273, 'stC': 329.15365840061344,
+    'stst': 494.40788172445616, 'damage': 3, 'timesout': 1,
+    'spincutslp': 0.051425894532076979, 'brakingpaceslow': 2.2425656876338924, 's2sen': 3.0044320966938169,
+    'obvious': 1.3424661801203506, 'str8thresh': 0.14383741216415255, 'steer2edge': 0.95021144003154068,
+    'clutchslip': 90.341006943295284, 'skidsev1': 0.57661669447984198}
 
 dead = {"dnsh3rpm": 1, "consideredstr8": 1,
         "upsh6rpm": 1,
@@ -851,6 +863,21 @@ TestPSO_parameter_by_pygomo4 = {'seriousABS': 12.07542861922415, 'dnsh3rpm': 577
                                 'sortofontrack': 2.5121800450425997, 'steer2edge': 1.2595504035783198,
                                 'backward': 0.6381775035124411, 'dnsh4rpm': 4867.223003372334}
 
-
-
-
+TestPSO_parameter_by_pygomo = {'seriousABS': 47.231246756757926, 'safeatanyspeed': 0.0013031923746988933,
+                               'carmaxvisib': 2.393972019595648, 'sxappropriatest2': 0.8575453666202135,
+                               'clutchspin': 20.091179202558806, 'fullstis': 0.6413303511683893,
+                               'ignoreinfleA': 0.6463847393531414, 'offroad': 1.284750146389005,
+                               'consideredstr8': 0.015154171338380712, 'wheeldia': 0.8903138892361268,
+                               'slipdec': 0.01871327135804684, 'fullstmaxsx': 15.05514660656509,
+                               'st': 677.0694573536032, 'carmin': 21.35782247017886,
+                               'sxappropriatest1': 23.56018183673521, 'oksyp': 25.952027717353857,
+                               'wwlim': 6.5764502290954425, 'sycon2': 1.1451961824246262,
+                               'spincutclip': 0.14629190255053232, 's2cen': 0.6100541434427585,
+                               'sycon1': 1.0795989982080352, 'brakingpacefast': 1.397882837485664,
+                               'backward': 2.709505313032225, 'obviousbase': 86.25818060771105,
+                               'spincutint': 0.9402000456141282, 'stC': 473.84716354429065, 'stst': 408.52020123972136,
+                               'damage': 5.1584346924263835, 'timesout': 0.6334425080763615,
+                               'spincutslp': 0.030107693319915772, 'brakingpaceslow': 3.3330631789483096,
+                               's2sen': 3.3107358583056605, 'obvious': 0.7032832040449148,
+                               'str8thresh': 0.15991694312954757, 'steer2edge': 1.1828467893658041,
+                               'clutchslip': 126.44691175811134, 'skidsev1': 0.7016059705420226}

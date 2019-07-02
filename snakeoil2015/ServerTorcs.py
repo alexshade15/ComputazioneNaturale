@@ -14,5 +14,5 @@ class ServerTorcs(Thread):
 
 
 if __name__ == "__main__":
-    os.chdir(r'C:\Users\alex\Desktop\torcs3004')
+    os.chdir(r'C:\Users\alex\Desktop\torcs3005')
     os.system('wtorcs.exe -t 1000000000')
