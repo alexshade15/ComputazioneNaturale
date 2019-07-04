@@ -5,6 +5,7 @@ import client
 import Queue
 import time
 from threading import Thread
+import def_param
 from def_param import new_param
 
 
@@ -20,9 +21,15 @@ class myProblem:
         3608.45,  # corkscrew
     ]
 
-    def __init__(self, n_servers, index):
+    def __init__(self, n_servers, index, par_name, n_gen, p_size, today, algo_name, new_parameters):
         self.n_servers = n_servers
         self.index = index
+        self.par_name = par_name
+        self.n_gen = n_gen
+        self.p_size = p_size
+        self.today = today
+        self.algo_name = algo_name
+        self.new_parameters = new_parameters
 
     def getValuePerLap(self, values):
         # valueaPerLap = [values[0]]
@@ -32,12 +39,12 @@ class myProblem:
 
     def fitness(self, dv):
         self.counter += 1
-        i = 0
-        P = new_param
 
-        for key in P:
+        P = def_param.used_parameters
+        # print "new", new_param
+        for i, key in enumerate(P):
             P[key] = dv[i]
-            i = i + 1
+        # print "P", P
 
         que = Queue.Queue()
         threadsList = list()
@@ -55,8 +62,8 @@ class myProblem:
 
         races = [
             {'lapTime': 0.0, 'damage': 0, 'distance': 0.0, 'out': []},
-            {'lapTime': 0.0, 'damage': 0, 'distance': 0.0, 'out': []},
-            {'lapTime': 0.0, 'damage': 0, 'distance': 0.0, 'out': []}
+            # {'lapTime': 0.0, 'damage': 0, 'distance': 0.0, 'out': []},
+            # {'lapTime': 0.0, 'damage': 0, 'distance': 0.0, 'out': []}
         ]
 
         try:
@@ -78,42 +85,41 @@ class myProblem:
 
         print P
         print "lastLapTime---> ", races[0][
-            'lapTime'], ' -- ', races[1]['lapTime'], ' -- ', races[2]['lapTime']  # , ' -- ', races[3]['lapTime']
-        print "damages---> ", races[0][
-            'damage'], ' -- ', races[1]['damage'], ' -- ', races[2]['damage']  # , ' -- ', races[3]['damage']
+            'lapTime']#, ' -- ', races[1]['lapTime'], ' -- ', races[2]['lapTime']  # , ' -- ', races[3]['lapTime']
+        # print "damages---> ", races[0][
+        #     'damage'], ' -- ', races[1]['damage'], ' -- ', races[2]['damage']  # , ' -- ', races[3]['damage']
         # print "distance---> ", races[0][
         #     'distance']  # , ' --- ', races[1]['distance'], ' --- ', races[2]['distance'], ' --- ', races[3]['distance']
-        print "times out--->", races[0]['out']
-        print "times out--->", races[1]['out']
-        print "times out--->", races[2]['out']
+        # print "times out--->", races[0]['out']
+        # print "times out--->", races[1]['out']
+        # print "times out--->", races[2]['out']
         # print "times out--->", races[3]['out']
-        print 'damage:', dv[28], 'out', dv[29]
+        # print 'damage:', dv[28], 'out', dv[29]
 
-        # https://pyformat.info
-        # print 'lastLapTime--->{:06.2f}{:06.2f}{:06.2f}'.format(races[0]['lapTime'], races[1]['lapTime'], races[2]['lapTime'])
 
         fit = 0
         for race in races:
             fit += race['lapTime']
-            try:
-                fit += race['damage'] / dv[25]
-            except:
-                print "Division by zero"
-            # fit += race['distance'] * dv[25]
-            try:
-                for elem in race['out']:
-                    fit += round(elem[1] * dv[26] * elem[0])
-            except:
-                print 'ops'
+            # try:
+            #     fit += race['damage'] / dv[25]
+            # except:
+            #     print "Division by zero"
+            # # fit += race['distance'] * dv[25]
+            # try:
+            #     for elem in race['out']:
+            #         fit += round(elem[1] * dv[26] * elem[0])
+            # except:
+            #     print 'ops'
 
         print "fitness--->", fit
 
-        os.chdir(r"C:\Users\alex\Documents\GitHub\ComputazioneNaturale\snakeoil2015")
-        with open("log_01-07_singleobj_singletrack_15pop_200gen.py", 'a') as outfile:
+        os.chdir(r"C:\Users\Vincenzo\Documents\GitHub\ComputazioneNaturale\snakeoil2015")
+        with open(self.new_parameters + "_LOG_" + self.par_name + "_nGen" + str(self.n_gen) + "_pSize" + str(
+                self.p_size) + "_circ" + str(self.n_servers) + "_" + self.algo_name + str(index) + "_today" + str(
+                self.today) + ".txt", 'a') as outfile:
             temp_log = {"algo": self.index, "gen": self.counter, "fitness": fit, "time": races[0]["lapTime"],
-                        "damage": races[0]['damage'], "out":races[0]['out'], "param":P}
-            outfile.write("evaluation_" + str(self.index) + "_" + str(self.counter) + " = " + str(temp_log))
-            json.dump(P, outfile)
+                        "damage": races[0]['damage'], "out": races[0]['out'], "param": P}
+            outfile.write("evaluation_" + str(self.index) + "_" + str(self.counter) + " = " + str(temp_log) + "\n")
 
         return [fit]
 
@@ -165,24 +171,9 @@ class myProblem:
         #     if y[elem] == 0:
         #         print elem
 
-        LOWER_VECTOR = [8.374055952321612, 0.0003840275773184268, 0.6875576048621013, 15.08731055169352,
-                        0.16560608653116465, 0.015427768359623097, 0.2459620745184269, 0.37317478133882886,
-                        0.3000795968437977, 0.003009930862625125, 0.2566283300633291, 6.02124565880238,
-                        10.160634065303778, 4.824980946637494, 4.824980946637494, 0.005414339470065621,
-                        0.3000717595299429, 0.030762644981111975, 0.15340382383030182, 0.19287732533152435,
-                        0.31150256106864116, 28.59214549671934, 0.5234959954368983, 98.74609752018404,
-                        148.3223645173369, 0.0001, 0.0001, 206.98663098772897, 0.6727697062901679, 0.9013296290081452,
-                        0.40273985403610524, 0.04315122364924577, 27.102302082988587, 0.28506343200946227,
-                        0.5007674360703409, 0.17298500834395264, 1.3461144779941612]
-        UPPER_VECTOR = [47.452983729822456, 0.0021761562714710846, 3.8961597608852405, 85.49475979292991,
-                        0.9384344903432662, 0.08742402070453087, 1.3937850889377525, 2.1146570942533636,
-                        1.7004510487815199, 0.017056274888209037, 1.4542272036921977, 34.12039206654681,
-                        57.576926370054736, 27.341558697612463, 27.341558697612463, 0.03068125699703851,
-                        1.700406637336343, 0.17432165489296783, 0.869288335038377, 1.0929715102119713,
-                        1.7651811793889665, 162.0221578147429, 2.966477307475756, 559.5612192810429, 840.4933989315755,
-                        10, 1, 1172.9242422637972, 3.812361668977617, 5.107534564379488, 2.282192506204596,
-                        0.24452360067905932, 153.57971180360198, 1.615359448053619, 2.8376821377319312,
-                        0.9802483806157314, 7.627982041966911]
+        UPPER_VECTOR = [47.452983729822456, 11931.037624716548, 12721.900851946237, 0.017056274888209037, 20254.654638840257, 10732.16733085984, 162.0221578147429, 840.4933989315755, 16182.612582577905, 0.24452360067905932, 153.57971180360198, 0.0021761562714710846, 16195.430943340954, 1.7004510487815199, 34.12039206654681, 7.627982041966911, 0.17432165489296783, 6822.956143562553, 2.282192506204596, 120.4460603092806, 16198.39234289141, 85.49475979292991, 1.3937850889377525, 0.00018756932853619516, 57.576926370054736, 3.8961597608852405, 0.11197401036355235, 0.08742402070453087, 1.700406637336343, 0.869288335038377, 1.0929715102119713, 16409.738189053376, 559.5612192810429, 0.03068125699703851, 27.341558697612463, 2.5569161259189537, 0.9384344903432662, 0.9802483806157314, 18.349049978068845, 1.4542272036921977, 1.7651811793889665, -0.2927063008345987, 2.966477307475756, 1172.9242422637972, 3.812361668977617, 5.107534564379488, 3.7339566273679186, 1.615359448053619, 2.8376821377319312, 12631.527834842433]
+        LOWER_VECTOR = [8.374055952321612, 2105.477227891156, 2245.041326814042, 0.003009930862625125, 3574.35081861887, 1893.9118819164423, 28.59214549671934, 148.3223645173369, 2855.755161631395, 0.04315122364924577, 27.102302082988587, 0.0003840275773184268, 2858.0172252954626, 0.3000795968437977, 6.02124565880238, 1.3461144779941612, 0.030762644981111975, 1204.0510841580976, 0.40273985403610524, 21.255187113402464, 2858.5398252161312, 15.08731055169352, 0.2459620745184269, 3.310046974168151e-05, 10.160634065303778, 0.6875576048621013, 0.019760119475921004, 0.015427768359623097, 0.3000717595299429, 0.15340382383030182, 0.19287732533152435, 2895.836151009419, 98.74609752018404, 0.005414339470065621, 4.824980946637494, 0.45122049280922716, 0.16560608653116465, 0.17298500834395264, 3.2380676431886206, 0.2566283300633291, 0.31150256106864116, -1.6586690380627254, 0.5234959954368983, 206.98663098772897, 0.6727697062901679, 0.9013296290081452, 0.6589335224766917, 0.28506343200946227, 0.5007674360703409, 2229.0931473251358]
+
 
         return (LOWER_VECTOR, UPPER_VECTOR)
 

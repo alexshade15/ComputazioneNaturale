@@ -145,65 +145,8 @@ class TrackSection():
         return self.begin <= x and x <= self.end
 
 
-# def automatic_transimission(P, g, c, rpm, sx, ts, tick):
-#     clutch_releaseF = .05
-#     ng, nc = g, c
-#     if ts < 0 and g > -1:
-#         ng = -1
-#         nc = 1
-#     elif ts > 0 and g < 0:
-#         ng = g + 1
-#         nc = 1
-#     elif c > 0:
-#         if g:
-#             nc = c - clutch_releaseF
-#         else:
-#             if ts < 0:
-#                 ng = -1
-#             else:
-#                 ng = 1
-#     elif not tick % 50 and sx > 20:
-#         pass
-#     elif g == 6 and rpm < P['dnsh5rpm']:
-#         ng = g - 1
-#         nc = 1
-#     elif g == 5 and rpm < P['dnsh4rpm']:
-#         ng = g - 1
-#         nc = 1
-#     elif g == 4 and rpm < P['dnsh3rpm']:
-#         ng = g - 1
-#         nc = 1
-#     elif g == 3 and rpm < P['dnsh2rpm']:
-#         ng = g - 1
-#         nc = 1
-#     elif g == 2 and rpm < P['dnsh1rpm']:
-#         ng = g - 1
-#         nc = 1
-#     elif g == 5 and rpm > P['upsh6rpm']:
-#         ng = g + 1
-#         nc = 1
-#     elif g == 4 and rpm > P['upsh5rpm']:
-#         ng = g + 1
-#         nc = 1
-#     elif g == 3 and rpm > P['upsh4rpm']:
-#         ng = g + 1
-#         nc = 1
-#     elif g == 2 and rpm > P['upsh3rpm']:
-#         ng = g + 1
-#         nc = 1
-#     elif g == 1 and rpm > P['upsh2rpm']:
-#         ng = g + 1
-#         nc = 1
-#     elif not g:
-#         ng = 1
-#         nc = 1
-#     else:
-#         pass
-#     return ng, nc
-#
-
 def automatic_transimission(P, g, c, rpm, sx, ts, tick):
-    clutch_releaseF = .15
+    clutch_releaseF = .05
     ng, nc = g, c
     if ts < 0 and g > -1:
         ng = -1
@@ -219,36 +162,36 @@ def automatic_transimission(P, g, c, rpm, sx, ts, tick):
                 ng = -1
             else:
                 ng = 1
-    elif not tick % 25 and sx > 20:
+    elif not tick % 50 and sx > 20:
         pass
-    elif g == 6 and rpm < 5500:
+    elif g == 6 and rpm < P['dnsh5rpm']:
         ng = g - 1
         nc = 1
-    elif g == 5 and rpm < 5300:
+    elif g == 5 and rpm < P['dnsh4rpm']:
         ng = g - 1
         nc = 1
-    elif g == 4 and rpm < 5000:
+    elif g == 4 and rpm < P['dnsh3rpm']:
         ng = g - 1
         nc = 1
-    elif g == 3 and rpm < 4700:
+    elif g == 3 and rpm < P['dnsh2rpm']:
         ng = g - 1
         nc = 1
-    elif g == 2 and rpm < 4400:
+    elif g == 2 and rpm < P['dnsh1rpm']:
         ng = g - 1
         nc = 1
-    elif g == 5 and rpm > 8600:
+    elif g == 5 and rpm > P['upsh6rpm']:
         ng = g + 1
         nc = 1
-    elif g == 4 and rpm > 8500:
+    elif g == 4 and rpm > P['upsh5rpm']:
         ng = g + 1
         nc = 1
-    elif g == 3 and rpm > 8400:
+    elif g == 3 and rpm > P['upsh4rpm']:
         ng = g + 1
         nc = 1
-    elif g == 2 and rpm > 8200:
+    elif g == 2 and rpm > P['upsh3rpm']:
         ng = g + 1
         nc = 1
-    elif g == 1 and rpm > 8000:
+    elif g == 1 and rpm > P['upsh2rpm']:
         ng = g + 1
         nc = 1
     elif not g:
@@ -257,6 +200,63 @@ def automatic_transimission(P, g, c, rpm, sx, ts, tick):
     else:
         pass
     return ng, nc
+
+
+# def automatic_transimission(P, g, c, rpm, sx, ts, tick):
+#     clutch_releaseF = .15
+#     ng, nc = g, c
+#     if ts < 0 and g > -1:
+#         ng = -1
+#         nc = 1
+#     elif ts > 0 and g < 0:
+#         ng = g + 1
+#         nc = 1
+#     elif c > 0:
+#         if g:
+#             nc = c - clutch_releaseF
+#         else:
+#             if ts < 0:
+#                 ng = -1
+#             else:
+#                 ng = 1
+#     elif not tick % 25 and sx > 20:
+#         pass
+#     elif g == 6 and rpm < 5500:
+#         ng = g - 1
+#         nc = 1
+#     elif g == 5 and rpm < 5300:
+#         ng = g - 1
+#         nc = 1
+#     elif g == 4 and rpm < 5000:
+#         ng = g - 1
+#         nc = 1
+#     elif g == 3 and rpm < 4700:
+#         ng = g - 1
+#         nc = 1
+#     elif g == 2 and rpm < 4400:
+#         ng = g - 1
+#         nc = 1
+#     elif g == 5 and rpm > 8600:
+#         ng = g + 1
+#         nc = 1
+#     elif g == 4 and rpm > 8500:
+#         ng = g + 1
+#         nc = 1
+#     elif g == 3 and rpm > 8400:
+#         ng = g + 1
+#         nc = 1
+#     elif g == 2 and rpm > 8200:
+#         ng = g + 1
+#         nc = 1
+#     elif g == 1 and rpm > 8000:
+#         ng = g + 1
+#         nc = 1
+#     elif not g:
+#         ng = 1
+#         nc = 1
+#     else:
+#         pass
+#     return ng, nc
 
 
 def find_slip(wsv_list):
@@ -440,8 +440,8 @@ def traffic_speed_adjustment(os, sx, ts, tsen):
 
 
 def steer_centeralign(P, tp, a, ttp=0):
-    pointing_ahead = abs(a) < 2.1964  # P['pointingahead'] #  "margine di sicurezza"
-    onthetrack = abs(tp) < 1  # P['sortofontrack']   ### dipende dal circuito
+    pointing_ahead = abs(a) <  P['pointingahead'] #  "margine di sicurezza"   2
+    onthetrack = abs(tp) <  P['sortofontrack']   ### dipende dal circuito     1
     offrd = 1
     if not onthetrack:
         offrd = P['offroad']
@@ -638,22 +638,6 @@ def learn_track_final(T, dfs):
     global secWidth
     global badness
     T.sectionList.append(TrackSection(secBegin, dfs, secMagnitude, secWidth, badness))
-
-
-# target_speed = 0
-# lap = 0
-# prev_distance_from_start = 1
-# learn_final = False
-# opHistory = list()
-# trackHistory = [0]
-# TRACKHISTORYMAX = 50
-# secType = 0
-# secBegin = 0
-# secMagnitude = 0
-# secWidth = 0
-# sangs = [-45, -19, -12, -7, -4, -2.5, -1.7, -1, -.5, 0, .5, 1, 1.7, 2.5, 4, 7, 12, 19, 45]
-# sangsrad = [(math.pi * X / 180.0) for X in sangs]
-# badness = 0
 
 
 def drive(c, T, tick):
@@ -943,20 +927,6 @@ if __name__ == "__main__":
             'str8thresh': 0.180931110454203, 'steer2edge': 1.3855757303789364, 'clutchslip': 96.14902282246956,
             'skidsev1': 0.17298500834395264}
 
-    test = {'seriousABS': 10.757421291890807, 'safeatanyspeed': 0.0006453390398051701, 'carmaxvisib': 2.768458043652468,
-            'sxappropriatest2': 0.46457840137857564, 'clutchspin': 47.63763690756603, 'fullstis': 0.495763953740572,
-            'ignoreinfleA': 0.6825689029984853, 'offroad': 0.8655560285262073, 'consideredstr8': 0.012451969700158792,
-            'wheeldia': 0.8181952809841151, 'slipdec': 0.007762189414298801, 'fullstmaxsx': 14.417992277926686,
-            'st': 612.2223115465459, 'carmin': 29.439135351228973, 'sxappropriatest1': 15.543929825913663,
-            'oksyp': 24.411947973755453, 'wwlim': 3.718324971722625, 'sycon2': 0.9772947991391873,
-            'spincutclip': 0.16897074252221173, 's2cen': 0.20741240442563685, 'sycon1': 0.8122226032538281,
-            'brakingpacefast': 1.190012068125462, 'backward': 1.9419458236772513, 'obviousbase': 47.275958973094475,
-            'spincutint': 1.5192402668912406, 'stC': 299.15677465676174, 'stst': 398.93297285400934,
-            'damage': 0.2771318474880136, 'timesout': 0.22183026694412036, 'spincutslp': 0.05594051221571096,
-            'brakingpaceslow': 3.344526164115594, 's2sen': 2.706412249699037, 'obvious': 1.4015301275750032,
-            'str8thresh': 0.1601374822504251, 'steer2edge': 0.8531998814567571, 'clutchslip': 150.7404194895933,
-            'skidsev1': 0.8191193976274463}
-    test2 = {'seriousABS': 34.04055393359991, 'safeatanyspeed': 0.001097189972325517, 'carmaxvisib': 3.727855077115155, 'clutchspin': 15.08731055169352, 'sxappropriatest2': 0.824059447513874, 'spincutslp': 0.08742402070453087, 'fullstis': 0.3263087119049954, 'ignoreinfleA': 1.0608220512308504, 'offroad': 0.7760897248886377, 'consideredstr8': 0.01277517017993228, 'wheeldia': 1.1409263524358662, 'fullstmaxsx': 34.12039206654681, 'carmin': 34.60973178380881, 'sxappropriatest1': 27.341558697612463, 'oksyp': 19.846687551674272, 'slipdec': 0.02275890545642434, 'sycon2': 1.1340216925764715, 'spincutclip': 0.14641657397112612, 's2cen': 0.4264459871147147, 'sycon1': 0.4940199003233391, 'brakingpacefast': 1.7616681015685844, 'obviousbase': 155.78542959147322, 'spincutint': 2.25393154264753, 'stC': 268.35524490045134, 'stst': 546.6586323407649, 'damage': 0.7764212127466816, 'timesout': 0.0001, 'st': 665.7849693171959, 'brakingpaceslow': 2.62167203445343, 's2sen': 2.056455171455051, 'obvious': 0.40273985403610524, 'str8thresh': 0.06185952496140884, 'clutchslip': 128.93449510120044, 'steer2edge': 0.7372368560803771, 'backward': 1.7065850556642246, 'skidsev1': 0.700634581873844, 'wwlim': 6.794121182359724}
     omega = {"seriousABS": 39.24229938766773, 'skidsev1': 0.7293705719677526, "senslim": 0.006660394248463853,
              "fullstis": 0.6734865811863352, "consideredstr8": 0.49731508572271965, "carmin": 46.07068182168395,
              "carmaxvisib": 3.783600088593208, "oksyp": 0.471014987306369, "slipdec": 0.012645889714834904,
@@ -974,7 +944,7 @@ if __name__ == "__main__":
              'upsh2rpm': 8500, 'upsh3rpm': 8500, 'upsh4rpm': 8500, 'upsh5rpm': 8500, 'upsh6rpm': 8500,
              'obviousbase': 95.66077216485036
              }
-    main(test2, port, m=0)
+    main(def_param .used_parameters, port, m=0)
 
 ####### snakeoil (5laps) #######
 # snakeoil: (on 5 laps)
