@@ -15,7 +15,7 @@ def namestr(obj, namespace):
     return [name for name in namespace if namespace[name] is obj]
 
 
-def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers):
+def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers, offset):
     # uda = pg.sade(gen=n_gen, variant=7, variant_adptv=1, memory=False, seed=1234, ftol=1e-3, xtol=1e-3)
     # pso from pygmo
     udas = []
@@ -53,7 +53,7 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers):
     print "Starting servers"
     servers = []
     for i in range(n_servers):
-        servers.append(ServerTorcs.ServerTorcs(port=3001 + i))
+        servers.append(ServerTorcs.ServerTorcs(port=3001 + i + offset))
         servers[i].start()
         time.sleep(.5)
     print "Servers started"
@@ -61,7 +61,7 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers):
     for index, uda in enumerate(udas):
         logs = []
         algo = pg.algorithm(uda)
-        new_algo_name = algo.get_name().replace(" ", "_")
+        new_algo_name = algo.get_name().replace(" ", "").replace(":", "")
         results_trial = []
 
         time.sleep(1)
@@ -71,7 +71,7 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers):
             # prob1 = pg.problem(myProblem(n_servers, index))
             prob1 = pg.problem(
                 myProblem(n_servers, index, par_name, n_gen, p_size, datetime.datetime.now().day, new_algo_name,
-                          new_parameters))
+                          new_parameters, offset))
             # prob1 = pg.problem(myProblemMultiobj(n_servers, index))
 
             log_trial = []
@@ -101,8 +101,6 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers):
                         n_servers) + "_" + new_algo_name + str(index) + "_today" + str(
                         datetime.datetime.now().day) + ".txt", 'w') as outfile:
             outfile.write(str(algo.extract(type(uda)).get_log()))
-            outfile.write("\n\n -------------------- \n\n")
-            json.dump(str(algo.extract(type(uda)).get_log()), outfile)
 
     print("global results: ", global_results)
 
@@ -123,10 +121,12 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers):
 
 
 if __name__ == "__main__":
+    offset = 2
+
     n_trials = 1
     n_servers = 1
     population_size = 15
-    n_gens = 200
+    n_gens = 100
     pg.set_global_rng_seed(seed=27)
-    new_parameters = "OnlyDistanceFitness"
-    mySADE(n_trials, n_gens, population_size, new_parameters, n_servers)
+    new_parameters = "DistanceDamageFitness"
+    mySADE(n_trials, n_gens, population_size, new_parameters, n_servers, offset)

@@ -21,7 +21,7 @@ class myProblem:
         3608.45,  # corkscrew
     ]
 
-    def __init__(self, n_servers, index, par_name, n_gen, p_size, today, algo_name, new_parameters):
+    def __init__(self, n_servers, index, par_name, n_gen, p_size, today, algo_name, new_parameters, offset):
         self.n_servers = n_servers
         self.index = index
         self.par_name = par_name
@@ -30,6 +30,7 @@ class myProblem:
         self.today = today
         self.algo_name = algo_name
         self.new_parameters = new_parameters
+        self.offset = offset
 
     def getValuePerLap(self, values):
         # valueaPerLap = [values[0]]
@@ -53,7 +54,7 @@ class myProblem:
         k = time.time()
         # print "Starting clients"
         for i in range(self.n_servers):
-            threadsList.append(Thread(target=clientCall, args=(P, 3001 + i, que)))
+            threadsList.append(Thread(target=clientCall, args=(P, 3001 + i + self.offset, que)))
             threadsList[i].start()
         for elem in threadsList:
             elem.join()
@@ -69,7 +70,7 @@ class myProblem:
         try:
             while que.qsize() > 0:
                 (lapT, dmg, dist, out, p) = que.get()
-                index = p % 3001
+                index = p % (3001 + self.offset)
                 # print "--lapT, dmg, dist-->", lapT, dmg, dist
                 if len(dmg) < 2 or dmg[len(dmg) - 1] > 10000:
                     races[index]['lapTime'] = 300
@@ -86,11 +87,11 @@ class myProblem:
         print P
         print "lastLapTime---> ", races[0][
             'lapTime']#, ' -- ', races[1]['lapTime'], ' -- ', races[2]['lapTime']  # , ' -- ', races[3]['lapTime']
-        # print "damages---> ", races[0][
-        #     'damage'], ' -- ', races[1]['damage'], ' -- ', races[2]['damage']  # , ' -- ', races[3]['damage']
+        print "damages---> ", races[0][
+            'damage']#, ' -- ', races[1]['damage'], ' -- ', races[2]['damage']  # , ' -- ', races[3]['damage']
         # print "distance---> ", races[0][
-        #     'distance']  # , ' --- ', races[1]['distance'], ' --- ', races[2]['distance'], ' --- ', races[3]['distance']
-        # print "times out--->", races[0]['out']
+        #     'distance']# , ' --- ', races[1]['distance'], ' --- ', races[2]['distance'], ' --- ', races[3]['distance']
+        print "times out--->", races[0]['out']
         # print "times out--->", races[1]['out']
         # print "times out--->", races[2]['out']
         # print "times out--->", races[3]['out']
@@ -100,23 +101,25 @@ class myProblem:
         fit = 0
         for race in races:
             fit += race['lapTime']
-            # try:
-            #     fit += race['damage'] / dv[25]
-            # except:
-            #     print "Division by zero"
-            # # fit += race['distance'] * dv[25]
+            try:
+                fit += race['damage'] / 2
+            except:
+                print "Division by zero"
+            # fit += race['distance'] * dv[25]
             # try:
             #     for elem in race['out']:
-            #         fit += round(elem[1] * dv[26] * elem[0])
+            #         fit += round(elem[1] * 3/25 * elem[0])
             # except:
             #     print 'ops'
 
         print "fitness--->", fit
 
         os.chdir(r"C:\Users\Vincenzo\Documents\GitHub\ComputazioneNaturale\snakeoil2015")
-        with open(self.new_parameters + "_LOG_" + self.par_name + "_nGen" + str(self.n_gen) + "_pSize" + str(
+
+        filename = self.new_parameters + "_LOG_" + self.par_name + "_nGen" + str(self.n_gen) + "_pSize" + str(
                 self.p_size) + "_circ" + str(self.n_servers) + "_" + self.algo_name + str(index) + "_today" + str(
-                self.today) + ".txt", 'a') as outfile:
+            self.today)
+        with open(filename + ".txt", 'a') as outfile:
             temp_log = {"algo": self.index, "gen": self.counter, "fitness": fit, "time": races[0]["lapTime"],
                         "damage": races[0]['damage'], "out": races[0]['out'], "param": P}
             outfile.write("evaluation_" + str(self.index) + "_" + str(self.counter) + " = " + str(temp_log) + "\n")
