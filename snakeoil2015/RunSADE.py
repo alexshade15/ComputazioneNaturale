@@ -22,9 +22,8 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers, offset):
     udas.append(
         pg.pso(gen=n_gen, omega=0.7298, eta1=2.05, eta2=2.05, max_vel=0.5, variant=5, neighb_type=2, memory=True,
                seed=1234))
-    # udas.append(pg.pso(gen=n_gen, omega=0.7298, eta1=2.05, eta2=2.05, max_vel=0.5, variant=5, neighb_type=4, neighb_param=4, memory=False, seed=1234))
-
-    # pso from slides
+    #
+    # # pso from slides
     udas.append(
         pg.pso(gen=n_gen, omega=0.7298, eta1=1.49618, eta2=1.49618, memory=True, seed=1234, max_vel=0.5, variant=5,
                neighb_type=2))
@@ -32,6 +31,8 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers, offset):
     udas.append(pg.sade(gen=n_gen, variant=7, variant_adptv=1, memory=False, seed=1234, ftol=1e-3, xtol=1e-3))
     udas.append(pg.sade(gen=n_gen, variant=8, variant_adptv=1, memory=False, seed=1234, ftol=1e-3, xtol=1e-3))
     udas.append(pg.sade(gen=n_gen, variant=18, variant_adptv=1, memory=False, seed=1234, ftol=1e-3, xtol=1e-3))
+
+    # algo = pg.algorithm(pg.gaco(10, 13, 1.0, 1e9, 0.0, 1, 7, 100000, 100000, 0.0, 10, 0.9, False, 23))
 
     # #MULTIOBJ UDAS
     # udas.append(
@@ -45,11 +46,12 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers, offset):
     #     pg.moead(gen=n_gen, weight_generation="low discrepancy", decomposition="weighted", neighbours=20, CR=1,
     #              F=.9, eta_m=20))
 
-    today = datetime.datetime.now().day
+    plotting = []
     P = used_parameters
     global_results = []
     print namestr(P, globals())
     par_name = namestr(P, globals())[0]
+    today = datetime.datetime.now().day
 
     print "Starting servers"
     servers = []
@@ -68,7 +70,7 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers, offset):
         time.sleep(1)
         print ('uda:', index)
 
-        for i in range(0, n_trials):
+        for j in range(0, n_trials):
             # prob1 = pg.problem(myProblem(n_servers, index))
             prob1 = pg.problem(
                 myProblem(n_servers, index, par_name, n_gen, p_size, today, new_algo_name,
@@ -77,17 +79,34 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers, offset):
 
             log_trial = []
             algo.set_verbosity(1)
-            pop = pg.population(prob1, p_size, seed=i + index)
+            pop = pg.population(prob1, p_size, seed=j + index)
             algo.evolve(pop)
             log_trial.append(algo.extract(type(uda)).get_log())
             log_trial = np.array(log_trial)
             results_trial.append(np.min(log_trial[:, log_trial.shape[1] - 1, 2]))
+            # print "trial", j, "--", results_trial
+            plotting.append(log_trial)
 
         logs.append(algo.extract(type(uda)).get_log())
         logs = np.array(logs)
+        # print "logs", logs
         avg_log = np.average(logs, 0)
+        # print "avg_log", avg_log
         global_results.append(np.min(results_trial, 0))
         plt.plot(avg_log[:, 1], avg_log[:, 2], label=algo.get_name() + str(index))
+        if n_trials > 1:
+            for j, elem in enumerate(plotting):
+                plt.plot(elem[0][:, 1], elem[0][:, 2], label=str(j))
+
+        # print "plotting", plotting
+        # print "-------------------"
+        # for elem in plotting:
+        #     print elem
+        #     for ele in elem:
+        #         print ele
+        #         for el in ele:
+        #             print el
+
 
         for i, key in enumerate(P):
             P[key] = pop.champion_x[i]
@@ -107,7 +126,7 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers, offset):
 
     for i, key in enumerate(P):
         P[key] = pop.champion_x[i]
-    os.chdir(r"C:\Users\alex\Documents\GitHub\ComputazioneNaturale\snakeoil2015")
+    os.chdir(r"C:\Users\Vincenzo\Documents\GitHub\ComputazioneNaturale\snakeoil2015")
     print "champion_x", pop.champion_x
     print "champion_f", pop.champion_f
     with open("def_param.py", 'a') as outfile:
@@ -116,7 +135,8 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers, offset):
     with open(new_parameters + ".txt", 'w') as outfile:
         json.dump(P, outfile)
     # We then add details to the plot
-    plt.legend()
+    if n_trials < 2:
+        plt.legend()
     plt.grid()
     plt.show()
 
@@ -129,5 +149,5 @@ if __name__ == "__main__":
     population_size = 15
     n_gens = 100
     pg.set_global_rng_seed(seed=27)
-    new_parameters = "FullFitness_Brake_BoundRpm"
+    new_parameters = "MoreThanOneLap"
     mySADE(n_trials, n_gens, population_size, new_parameters, n_servers, offset)

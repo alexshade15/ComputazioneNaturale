@@ -440,8 +440,8 @@ def traffic_speed_adjustment(os, sx, ts, tsen):
 
 
 def steer_centeralign(P, tp, a, ttp=0):
-    pointing_ahead = abs(a) <  P['pointingahead'] #  "margine di sicurezza"   2
-    onthetrack = abs(tp) <  P['sortofontrack']   ### dipende dal circuito     1
+    pointing_ahead = abs(a) < P['pointingahead']   #  "margine di sicurezza"   2
+    onthetrack = abs(tp) < P['sortofontrack']      #  dipende dal circuito     1
     offrd = 1
     if not onthetrack:
         offrd = P['offroad']
@@ -814,7 +814,7 @@ def main(P, port, m=1):
         #     print 'Cambio marcia da', gear, 'a', C.S.d['gear']
         #     gear = C.S.d['gear']
 
-        if lap == 2:
+        if lap > 1:
             tp = abs(C.S.d['trackPos'])
             # print tp
             if tp >= 0.95:
@@ -831,11 +831,11 @@ def main(P, port, m=1):
                 max_out = 0
 
         if (lastLapTime[len(lastLapTime) - 1] != C.S.d['lastLapTime']):
-            lap = 2
+            lap += 1
             lastLapTime.append(C.S.d['lastLapTime'])
             damages.append(C.S.d['damage'])
             distance.append(C.S.d['distRaced'])
-            if (len(lastLapTime) == 3) and m == 1:
+            if (len(lastLapTime) == 5) and m == 1:
                 C.R.d['meta'] = 1
                 C.respond_to_server()
                 C.shutdown()
@@ -927,24 +927,8 @@ if __name__ == "__main__":
             'str8thresh': 0.180931110454203, 'steer2edge': 1.3855757303789364, 'clutchslip': 96.14902282246956,
             'skidsev1': 0.17298500834395264}
 
-    omega = {"seriousABS": 39.24229938766773, 'skidsev1': 0.7293705719677526, "senslim": 0.006660394248463853,
-             "fullstis": 0.6734865811863352, "consideredstr8": 0.49731508572271965, "carmin": 46.07068182168395,
-             "carmaxvisib": 3.783600088593208, "oksyp": 0.471014987306369, "slipdec": 0.012645889714834904,
-             "sycon2": 0.51797799635969, "s2cen": 0.21583966099414115, "sycon1": 1.2389863638133087,
-             "sxappropriatest2": 0.38179786664512133, "stst": 224.0820635864317, "spincutslp": 0.03162267724915859,
-             "str8thresh": 0.2123857122456918, "clutch_release": 0.062011056107600826, "clutchspin": 51.65202572925723,
-             "safeatanyspeed": 0.002193726997701581, "sxappropriatest1": 20.633734330603808, "stC": 981.0997206955651,
-             "ignoreinfleA": 20.66291277812629, "offroad": 0.8818078976568309, "sortofontrack": 2.751569945991889,
-             "fullstmaxsx": 33.91804687064625, "brakingpacefast": 2.496227557407688, "wwlim": 5.862619984938184,
-             "spincutclip": 0.1250825878610867, "clutchslip": 121.10460328125788, "spincutint": 1.84505105235883,
-             "st": 694.3079635285878, "brakingpaceslow": 4.341295573156362, "s2sen": 3.4863663641211025,
-             "obvious": 1.1667162779850306, "backontracksx": 8.756745238323102, "pointingahead": 1.2553200363856651,
-             "steer2edge": 2.3906490976188164, "backward": 1.8536343806433506, "wheeldia": 0.85542776687776345,
-             'dnsh1rpm': 5000, 'dnsh2rpm': 5000, 'dnsh3rpm': 5000, 'dnsh4rpm': 5000, 'dnsh5rpm': 5000,
-             'upsh2rpm': 8500, 'upsh3rpm': 8500, 'upsh4rpm': 8500, 'upsh5rpm': 8500, 'upsh6rpm': 8500,
-             'obviousbase': 95.66077216485036
-             }
-    main(def_param .used_parameters, port, m=0)
+    omega = {"seriousABS": 30.917313675035082, "dnsh3rpm": 2277.3748124890767, "dnsh5rpm": 5161.008529255238, "consideredstr8": 0.014422763716695626, "upsh6rpm": 4641.849598646489, "dnsh2rpm": 4083.7460965865716, "obviousbase": 91.56323901577467, "stst": 646.8840720470463, "upsh3rpm": 3617.9543837958627, "str8thresh": 0.046064523522487126, "clutchslip": 73.7071618881323, "safeatanyspeed": 0.0016737414663727987, "upsh4rpm": 10084.914268381892, "offroad": 0.4830693886271663, "fullstmaxsx": 28.626081603738953, "wwlim": 5.450207901757214, "spincutclip": 0.09160353424897875, "dnsh1rpm": 2025.0389080699022, "obvious": 1.8341497210854247, "backontracksx": 73.17177848544353, "upsh2rpm": 7829.607462662457, "clutchspin": 25.941154979343406, "fullstis": 1.2734285158250205, "brake": 0.00013612297181159191, "carmin": 35.59853750218664, "carmaxvisib": 2.7670297838796625, "oksyp": 0.0220715793152442, "spincutslp": 0.03176100234699471, "sycon2": 1.0478499278186009, "s2cen": 0.592852636508848, "sycon1": 0.31201996681216904, "upsh5rpm": 11673.407335364689, "stC": 165.06076012234882, "slipdec": 0.01072623479463959, "sxappropriatest1": 15.142023248780777, "sortofontrack": 1.9257910090979415, "sxappropriatest2": 0.7124374626647256, "skidsev1": 0.5979255478875778, "ignoreinfleA": 10.294684912584234, "wheeldia": 0.9635012405454104, "brakingpacefast": 1.4128425367853756, "sensang": -1.5764557788683555, "spincutint": 2.627619163570864, "st": 429.9001162693834, "brakingpaceslow": 2.6559009390624877, "s2sen": 3.729780318500916, "pointingahead": 2.9657004097086963, "steer2edge": 1.5286627573670089, "backward": 1.1948757776299521, "dnsh4rpm": 2879.0513770796924}
+    main(omega, port, m=0)
 
 ####### snakeoil (5laps) #######
 # snakeoil: (on 5 laps)
