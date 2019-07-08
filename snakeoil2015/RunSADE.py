@@ -45,6 +45,7 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers, offset):
     #     pg.moead(gen=n_gen, weight_generation="low discrepancy", decomposition="weighted", neighbours=20, CR=1,
     #              F=.9, eta_m=20))
 
+    today = datetime.datetime.now().day
     P = used_parameters
     global_results = []
     print namestr(P, globals())
@@ -70,7 +71,7 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers, offset):
         for i in range(0, n_trials):
             # prob1 = pg.problem(myProblem(n_servers, index))
             prob1 = pg.problem(
-                myProblem(n_servers, index, par_name, n_gen, p_size, datetime.datetime.now().day, new_algo_name,
+                myProblem(n_servers, index, par_name, n_gen, p_size, today, new_algo_name,
                           new_parameters, offset))
             # prob1 = pg.problem(myProblemMultiobj(n_servers, index))
 
@@ -92,21 +93,21 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers, offset):
             P[key] = pop.champion_x[i]
 
         with open(new_parameters + "_BEST_" + par_name + "_nGen" + str(n_gen) + "_pSize" + str(p_size) + "_circ" + str(
-                n_servers) + "_" + new_algo_name + str(index) + "_today" + str(datetime.datetime.now().day) + ".txt",
+                n_servers) + "_" + new_algo_name + str(index) + "_today" + str(today) + ".txt",
                   'w') as outfile:
             json.dump(P, outfile)
 
         with open(
                 new_parameters + "_GenBest_" + par_name + "_nGen" + str(n_gen) + "_pSize" + str(p_size) + "_circ" + str(
                         n_servers) + "_" + new_algo_name + str(index) + "_today" + str(
-                        datetime.datetime.now().day) + ".txt", 'w') as outfile:
+                        today) + ".txt", 'w') as outfile:
             outfile.write(str(algo.extract(type(uda)).get_log()))
 
     print("global results: ", global_results)
 
     for i, key in enumerate(P):
         P[key] = pop.champion_x[i]
-    os.chdir(r"C:\Users\Vincenzo\Documents\GitHub\ComputazioneNaturale\snakeoil2015")
+    os.chdir(r"C:\Users\alex\Documents\GitHub\ComputazioneNaturale\snakeoil2015")
     print "champion_x", pop.champion_x
     print "champion_f", pop.champion_f
     with open("def_param.py", 'a') as outfile:
@@ -121,12 +122,12 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers, offset):
 
 
 if __name__ == "__main__":
-    offset = 2
+    offset = 0
 
     n_trials = 1
     n_servers = 1
     population_size = 15
     n_gens = 100
     pg.set_global_rng_seed(seed=27)
-    new_parameters = "DistanceDamageFitness"
+    new_parameters = "FullFitness_Brake_BoundRpm"
     mySADE(n_trials, n_gens, population_size, new_parameters, n_servers, offset)
