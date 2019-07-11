@@ -19,18 +19,18 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers, offset):
     # uda = pg.sade(gen=n_gen, variant=7, variant_adptv=1, memory=False, seed=1234, ftol=1e-3, xtol=1e-3)
     # pso from pygmo
     udas = []
-    udas.append(
-        pg.pso(gen=n_gen, omega=0.7298, eta1=2.05, eta2=2.05, max_vel=0.5, variant=5, neighb_type=2, memory=True,
-               seed=1234))
+    # udas.append(
+    #     pg.pso(gen=n_gen, omega=0.7298, eta1=2.05, eta2=2.05, max_vel=0.5, variant=5, neighb_type=2, memory=True,
+    #            seed=1234))
     #
     # # pso from slides
-    udas.append(
-        pg.pso(gen=n_gen, omega=0.7298, eta1=1.49618, eta2=1.49618, memory=True, seed=1234, max_vel=0.5, variant=5,
-               neighb_type=2))
-
-    udas.append(pg.sade(gen=n_gen, variant=7, variant_adptv=1, memory=False, seed=1234, ftol=1e-3, xtol=1e-3))
+    # udas.append(
+    #     pg.pso(gen=n_gen, omega=0.7298, eta1=1.49618, eta2=1.49618, memory=True, seed=1234, max_vel=0.5, variant=5,
+    #            neighb_type=2))
+    #
+    # udas.append(pg.sade(gen=n_gen, variant=7, variant_adptv=1, memory=False, seed=1234, ftol=1e-3, xtol=1e-3))
     udas.append(pg.sade(gen=n_gen, variant=8, variant_adptv=1, memory=False, seed=1234, ftol=1e-3, xtol=1e-3))
-    udas.append(pg.sade(gen=n_gen, variant=18, variant_adptv=1, memory=False, seed=1234, ftol=1e-3, xtol=1e-3))
+    # udas.append(pg.sade(gen=n_gen, variant=18, variant_adptv=1, memory=False, seed=1234, ftol=1e-3, xtol=1e-3))
 
     # algo = pg.algorithm(pg.gaco(10, 13, 1.0, 1e9, 0.0, 1, 7, 100000, 100000, 0.0, 10, 0.9, False, 23))
 
@@ -73,7 +73,7 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers, offset):
         for j in range(0, n_trials):
             # prob1 = pg.problem(myProblem(n_servers, index))
             prob1 = pg.problem(
-                myProblem(n_servers, index, par_name, n_gen, p_size, today, new_algo_name,
+                myProblem(n_servers, index+j, par_name, n_gen, p_size, today, new_algo_name,
                           new_parameters, offset))
             # prob1 = pg.problem(myProblemMultiobj(n_servers, index))
 
@@ -112,13 +112,13 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers, offset):
             P[key] = pop.champion_x[i]
 
         with open(new_parameters + "_BEST_" + par_name + "_nGen" + str(n_gen) + "_pSize" + str(p_size) + "_circ" + str(
-                n_servers) + "_" + new_algo_name + str(index) + "_today" + str(today) + ".txt",
+                n_servers) + "_" + new_algo_name + str(index+j) + "_today" + str(today) + ".txt",
                   'w') as outfile:
             json.dump(P, outfile)
 
         with open(
                 new_parameters + "_GenBest_" + par_name + "_nGen" + str(n_gen) + "_pSize" + str(p_size) + "_circ" + str(
-                        n_servers) + "_" + new_algo_name + str(index) + "_today" + str(
+                        n_servers) + "_" + new_algo_name + str(index+j) + "_today" + str(
                         today) + ".txt", 'w') as outfile:
             outfile.write(str(algo.extract(type(uda)).get_log()))
 
@@ -144,10 +144,10 @@ def mySADE(n_trials, n_gen, p_size, new_parameters, n_servers, offset):
 if __name__ == "__main__":
     offset = 0
 
-    n_trials = 1
+    n_trials = 5
     n_servers = 1
     population_size = 15
     n_gens = 100
     pg.set_global_rng_seed(seed=27)
-    new_parameters = "MoreThanOneLap"
+    new_parameters = "SADE2_FullFit_5T_C1"
     mySADE(n_trials, n_gens, population_size, new_parameters, n_servers, offset)

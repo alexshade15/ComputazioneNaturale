@@ -835,7 +835,7 @@ def main(P, port, m=1):
             lastLapTime.append(C.S.d['lastLapTime'])
             damages.append(C.S.d['damage'])
             distance.append(C.S.d['distRaced'])
-            if (len(lastLapTime) == 5) and m == 1:
+            if (len(lastLapTime) == 3) and m == 1:
                 C.R.d['meta'] = 1
                 C.respond_to_server()
                 C.shutdown()
