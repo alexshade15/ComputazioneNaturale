@@ -8,7 +8,6 @@
       <change beforePath="$PROJECT_DIR$/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/client.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/def_param.py" beforeDir="false" afterPath="$PROJECT_DIR$/def_param.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/problems.py" beforeDir="false" afterPath="$PROJECT_DIR$/problems.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/snakeoil.py" beforeDir="false" afterPath="$PROJECT_DIR$/snakeoil.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,188 +21,24 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/snakeoil.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="113">
-              <caret line="77" column="22" lean-forward="true" selection-start-line="77" selection-start-column="22" selection-end-line="77" selection-end-column="22" />
-              <folding>
-                <element signature="e#2684#2697#0" expanded="true" />
-                <element signature="e#3833#5281#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="251" column="18" lean-forward="true" selection-start-line="251" selection-start-column="18" selection-end-line="251" selection-end-column="18" />
+            <state relative-caret-position="264">
+              <caret line="896" column="13" selection-start-line="896" selection-start-column="13" selection-end-line="896" selection-end-column="13" />
               <folding>
-                <element signature="e#437#3711#0" />
+                <element signature="e#437#3714#0" />
                 <element signature="e#465#574#0" />
                 <element signature="e#608#754#0" />
-                <element signature="e#798#2111#0" />
-                <element signature="e#1104#2039#0" />
-                <element signature="e#1151#1332#0" />
-                <element signature="e#1367#2039#0" />
-                <element signature="e#1403#1584#0" />
-                <element signature="e#1660#1851#0" />
-                <element signature="e#1894#2039#0" />
-                <element signature="e#2916#3118#0" />
-                <element signature="e#3032#3080#0" />
-                <element signature="e#3160#3541#0" />
-                <element signature="e#3310#3503#0" />
-                <element signature="e#3350#3503#0" />
-                <element signature="e#3740#4811#0" />
-                <element signature="e#3806#4262#0" />
-                <element signature="e#4710#4714#0" />
-                <element signature="e#4771#4811#0" />
-                <element signature="e#4814#4872#0" />
-                <element signature="e#6275#8950#0" />
-                <element signature="e#10109#11130#0" />
-                <element signature="e#12910#13266#0" />
-                <element signature="e#13348#13491#0" />
-                <element signature="e#14296#14618#0" />
-                <element signature="e#14652#14791#0" />
-                <element signature="e#14834#14960#0" />
-                <element signature="e#15404#16342#0" />
-                <element signature="e#15738#16044#0" />
-                <element signature="e#15826#16017#0" />
-                <element signature="e#16063#16268#0" />
-                <element signature="e#16087#16268#0" />
-                <element signature="e#16380#16564#0" />
-                <element signature="e#16568#16586#0" />
-                <element signature="e#17318#17660#0" />
-                <element signature="e#18352#18359#0" />
-                <element signature="e#18534#18547#0" />
-                <element signature="e#19746#19753#0" />
-                <element signature="e#21013#21054#0" />
-                <element signature="e#22517#22691#0" />
-                <element signature="e#22588#22661#0" />
-                <element signature="e#22951#22971#0" />
-                <element signature="e#23190#23285#0" />
-                <element signature="e#23328#23479#0" />
-                <element signature="e#23565#23924#0" />
-                <element signature="e#23765#23924#0" />
-                <element signature="e#24002#24183#0" />
-                <element signature="e#24339#24371#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/def_param.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="143" column="18" selection-start-line="143" selection-end-line="143" selection-end-column="18" />
-              <folding>
-                <element signature="e#21#3869#0" />
-                <element signature="e#3888#5990#0" />
-                <element signature="e#6013#7748#0" />
-                <element signature="e#12250#13289#0" />
-                <element signature="e#13299#14489#0" />
-                <element signature="e#14506#14655#0" />
-                <element signature="e#14667#19184#0" />
-                <element signature="e#19190#20987#0" />
-                <element signature="e#20989#21054#0" />
-                <element signature="e#21115#22866#0" />
-                <element signature="e#22928#24671#0" />
-                <element signature="e#24733#26482#0" />
-                <element signature="e#26544#28297#0" />
-                <element signature="e#28359#30113#0" />
-                <element signature="e#30173#31915#0" />
-                <element signature="e#31917#31969#0" />
-                <element signature="e#32032#33782#0" />
-                <element signature="e#33790#35661#0" />
-                <element signature="e#35663#35715#0" />
-                <element signature="e#35776#37528#0" />
-                <element signature="e#37530#37556#0" />
-                <element signature="e#37659#39458#0" />
-                <element signature="e#39460#39486#0" />
-                <element signature="e#39539#41333#0" />
-                <element signature="e#41343#43136#0" />
-                <element signature="e#43146#44939#0" />
-                <element signature="e#44948#46715#0" />
-                <element signature="e#46725#48518#0" />
-                <element signature="e#48520#48569#0" />
-                <element signature="e#48622#50383#0" />
-                <element signature="e#50384#50410#0" />
-                <element signature="e#50493#52526#0" />
-                <element signature="e#52581#54364#0" />
-                <element signature="e#54365#54390#0" />
-                <element signature="e#54524#56318#0" />
-                <element signature="e#56350#58819#0" />
-                <element signature="e#58852#61321#0" />
-                <element signature="e#61353#63788#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/same_fitness.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="694">
-              <caret line="1029" column="82" selection-start-line="1029" selection-start-column="82" selection-end-line="1029" selection-end-column="82" />
-              <folding>
-                <element signature="e#36#2030#0" />
-                <element signature="e#2051#4046#0" />
-                <element signature="e#4067#6062#0" />
-                <element signature="e#6083#8078#0" />
-                <element signature="e#8099#10092#0" />
-                <element signature="e#10113#12106#0" />
-                <element signature="e#12127#14119#0" />
-                <element signature="e#14140#16133#0" />
-                <element signature="e#16154#18147#0" />
-                <element signature="e#18168#20162#0" />
-                <element signature="e#20183#22177#0" />
-                <element signature="e#22198#24191#0" />
-                <element signature="e#24212#26205#0" />
-                <element signature="e#26226#28218#0" />
-                <element signature="e#28239#30231#0" />
-                <element signature="e#30252#32241#0" />
-                <element signature="e#32262#34253#0" />
-                <element signature="e#34274#36266#0" />
-                <element signature="e#36287#38281#0" />
-                <element signature="e#38302#40294#0" />
-                <element signature="e#40315#42308#0" />
-                <element signature="e#42329#44322#0" />
-                <element signature="e#44343#46334#0" />
-                <element signature="e#46355#48346#0" />
-                <element signature="e#48367#50359#0" />
-                <element signature="e#50380#52372#0" />
-                <element signature="e#52393#54386#0" />
-                <element signature="e#54407#56400#0" />
-                <element signature="e#56421#58412#0" />
-                <element signature="e#58433#60425#0" />
-                <element signature="e#60465#62461#0" />
-                <element signature="e#62482#64478#0" />
-                <element signature="e#64499#66495#0" />
-                <element signature="e#66516#68512#0" />
-                <element signature="e#68533#70529#0" />
-                <element signature="e#70550#72545#0" />
-                <element signature="e#72566#74561#0" />
-                <element signature="e#74582#76577#0" />
-                <element signature="e#76598#78593#0" />
-                <element signature="e#78614#80610#0" />
-                <element signature="e#80631#82626#0" />
-                <element signature="e#82647#84642#0" />
-                <element signature="e#84663#86659#0" />
-                <element signature="e#86680#88676#0" />
-                <element signature="e#88697#90693#0" />
-                <element signature="e#90714#92710#0" />
-                <element signature="e#92731#94727#0" />
-                <element signature="e#94748#96743#0" />
-                <element signature="e#96764#98759#0" />
-                <element signature="e#98780#100775#0" />
-                <element signature="e#100796#102791#0" />
-                <element signature="e#102812#104807#0" />
-                <element signature="e#104828#106823#0" />
-                <element signature="e#106844#108839#0" />
-                <element signature="e#108860#110855#0" />
-                <element signature="e#110876#112871#0" />
+                <element signature="e#3743#4815#0" />
+                <element signature="e#4879#6091#0" />
+                <element signature="e#6094#6152#0" />
+                <element signature="e#7419#7535#0" />
+                <element signature="e#7575#10215#0" />
+                <element signature="e#11158#11230#0" />
+                <element signature="e#11267#11359#0" />
+                <element signature="e#11414#12435#0" />
+                <element signature="e#25309#27017#1" />
+                <element signature="e#32419#34322#0" />
               </folding>
             </state>
           </provider>
@@ -212,8 +47,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ServerTorcs.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
+            <state relative-caret-position="289">
+              <caret line="17" column="29" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -221,30 +56,40 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/problems.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/def_param.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="464">
-              <caret line="309" column="103" selection-start-line="309" selection-start-column="103" selection-end-line="309" selection-end-column="103" />
+            <state relative-caret-position="198">
+              <caret line="924" column="806" selection-start-line="924" selection-start-column="806" selection-end-line="924" selection-end-column="806" />
               <folding>
-                <element signature="e#0#13#0" expanded="true" />
-                <element signature="e#166#368#0" />
-                <element signature="e#420#473#0" />
-                <element signature="e#521#690#0" />
-                <element signature="e#1688#2394#0" />
-                <element signature="e#3733#3757#0" />
+                <element signature="e#21#3869#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/RunSADE.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="55">
+              <caret line="161" column="24" selection-start-line="161" selection-start-column="24" selection-end-line="161" selection-end-column="24" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+                <element signature="e#3261#3337#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RunSADE.py">
+        <entry file="file://$PROJECT_DIR$/problems.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="397">
-              <caret line="96" column="10" selection-start-line="96" selection-start-column="10" selection-end-line="96" selection-end-column="10" />
+            <state relative-caret-position="186">
+              <caret line="55" selection-start-line="55" selection-end-line="55" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
+                <element signature="e#4998#5013#0" />
+                <element signature="e#8734#14514#0" />
               </folding>
             </state>
           </provider>
@@ -261,39 +106,40 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>clutch'</find>
-      <find>ao</find>
-      <find>spincutint</find>
-      <find>spincutslp</find>
-      <find>oppo</find>
-      <find>traffic_navigation</find>
-      <find>lastLapTime---&gt;  4[45678]</find>
-      <find>speed_appropriate_steer</find>
-      <find>spincutclip</find>
-      <find>carmaxvisib</find>
-      <find>fitness---&gt; [12][123456][\d]\.</find>
-      <find>skid</find>
-      <find>alpha</find>
-      <find>S['z']</find>
-      <find>badness</find>
-      <find>offroad</find>
-      <find>opponents</find>
-      <find>pointing</find>
-      <find>backw</find>
-      <find>steer</find>
-      <find>sangsrad</find>
-      <find>backontracksx</find>
-      <find>distan</find>
-      <find>sortofontrack</find>
-      <find>pointingahead</find>
-      <find>fitness---&gt; [12][1234][\d]\.</find>
-      <find>v4</find>
-      <find>rpm</find>
-      <find>v6</find>
-      <find>v5</find>
+      <find>n_trials</find>
+      <find>fitness---&gt; 4[0123]\.</find>
+      <find>verb</find>
+      <find>sh</find>
+      <find>33</find>
+      <find>33\.49</find>
+      <find>dnsh4rpm</find>
+      <find>fitness...&gt; 4[012]\.[01]</find>
+      <find>fitness---&gt; 4[012]\.[0123456]</find>
+      <find>fitness---&gt; 4[012]\.[0123]</find>
+      <find>fitness---&gt;</find>
+      <find>lastlaptime...&gt;  \[4[012345]</find>
+      <find>lastlaptime...&gt;  \[4[01234]</find>
+      <find>fitness---&gt; [12][0123245][\d]\.</find>
+      <find>fitness---&gt; [12][0123245][01234567]\.</find>
+      <find>lastlaptime---&gt;  \[[\]\d\. -]*\[[\]\d\. -]*\[96</find>
+      <find>fitness---&gt; 2[12345][01234567]\.</find>
+      <find>fitness---&gt; 2[1234][\d]\.</find>
+      <find>fitness---&gt; 4[01]\.</find>
+      <find>fitness---&gt; 4[012]\.</find>
+      <find>fitness...&gt; 2[012345][\d]\.</find>
+      <find>44\.</find>
+      <find>\[43\.</find>
+      <find>\[44\.</find>
+      <find>\[45\.1</find>
+      <find>fitness...&gt; 4[01]\.[012345]</find>
+      <find>fitness---&gt; 4[01]\.[0123]</find>
+      <find>fitness...&gt; 4[012]\.</find>
+      <find>fitness---&gt; 4[01]\.7</find>
+      <find>brake</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="IdeDocumentHistory">
@@ -306,20 +152,21 @@
         <option value="$PROJECT_DIR$/clientThread.py" />
         <option value="$PROJECT_DIR$/same_fitness.py" />
         <option value="$PROJECT_DIR$/TestPSO_parameter_by_pygomo.txt" />
-        <option value="$PROJECT_DIR$/ServerTorcs.py" />
         <option value="$PROJECT_DIR$/snakeoil.py" />
+        <option value="$PROJECT_DIR$/ServerTorcs.py" />
+        <option value="$USER_HOME$/Desktop/untitled/fitnessplot.py" />
+        <option value="$PROJECT_DIR$/dictionaries.py" />
         <option value="$PROJECT_DIR$/def_param.py" />
+        <option value="$PROJECT_DIR$/problems.py" />
         <option value="$PROJECT_DIR$/client.py" />
         <option value="$PROJECT_DIR$/RunSADE.py" />
-        <option value="$PROJECT_DIR$/problems.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-14" />
-    <option name="y" value="-14" />
-    <option name="width" value="1942" />
-    <option name="height" value="2330" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="673" />
+    <option name="width" value="694" />
+    <option name="height" value="735" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -329,6 +176,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -340,14 +188,13 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="C:/Program Files/Git/bin/git.exe" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -361,8 +208,50 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.ServerTorcs">
+  <component name="RunManager" selected="Python.RunSADE2">
     <configuration name="RunSADE" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="snakeoil2015" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/RunSADE.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="RunSADE2" type="PythonConfigurationType" factoryName="Python">
+      <module name="snakeoil2015" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/RunSADE.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="RunSADE3" type="PythonConfigurationType" factoryName="Python">
       <module name="snakeoil2015" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -396,27 +285,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ServerTorcs.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="TestDE (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="snakeoil2015" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\alex\Documents\GitHub\ComputazioneNaturale\snakeoil2015\TestSADE.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -488,20 +356,66 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="dictionaries" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="snakeoil2015" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dictionaries.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="fitnessplot" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="snakeoil2015" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$USER_HOME$/Desktop/untitled" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$USER_HOME$/Desktop/untitled/fitnessplot.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
+      <item itemvalue="Python.RunSADE2" />
+      <item itemvalue="Python.RunSADE3" />
       <item itemvalue="Python.client3002" />
       <item itemvalue="Python.client3003" />
       <item itemvalue="Python.RunSADE" />
       <item itemvalue="Python.ServerTorcs" />
-      <item itemvalue="Python.TestDE (1)" />
       <item itemvalue="Python.clientThread" />
+      <item itemvalue="Python.dictionaries" />
+      <item itemvalue="Python.fitnessplot" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.ServerTorcs" />
+        <item itemvalue="Python.dictionaries" />
+        <item itemvalue="Python.fitnessplot" />
         <item itemvalue="Python.RunSADE" />
         <item itemvalue="Python.clientThread" />
-        <item itemvalue="Python.TestDE (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -528,46 +442,26 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1933" height="1173" extended-state="6" />
-    <editor active="true" />
+    <frame x="673" y="0" width="694" height="735" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49915683" visible="true" weight="0.1563981" />
-      <window_info id="Structure" order="1" sideWeight="0.50084317" side_tool="true" weight="0.15653495" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4954751" visible="true" weight="0.3917683" />
+      <window_info id="Structure" order="1" sideWeight="0.5045249" side_tool="true" weight="0.3917683" />
       <window_info id="Favorites" order="2" sideWeight="0.50110376" side_tool="true" weight="0.10163244" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32950193" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.4386973" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3994253" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32890365" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49947312" visible="true" weight="0.60465115" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39934534" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.3291506" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32827735" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.3291506" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3291506" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="10" visible="true" weight="0.31896552" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32890365" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50052685" side_tool="true" weight="0.43207857" />
+      <window_info anchor="bottom" id="Python Console" order="10" weight="0.5232558" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
-    <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49915683" visible="true" weight="0.1563981" />
-      <window_info id="Structure" order="1" sideWeight="0.50084317" side_tool="true" weight="0.15653495" />
-      <window_info id="Favorites" order="2" sideWeight="0.50110376" side_tool="true" weight="0.10163244" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32950193" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.5258621" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3994253" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32950193" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32950193" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32950193" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Python Console" order="10" weight="0.355364" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-    </layout-to-restore>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/test.py" />
@@ -576,13 +470,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
           <caret line="121" column="8" selection-start-line="121" selection-start-column="4" selection-end-line="121" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Python27/Lib/site-packages/pygmo/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
-          <caret line="379" column="55" selection-start-line="379" selection-start-column="51" selection-end-line="379" selection-end-column="55" />
         </state>
       </provider>
     </entry>
@@ -634,13 +521,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/.PyCharmCE2019.1/system/python_stubs/-762174762/pygmo/core/pso.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1173">
-          <caret line="113" column="8" selection-start-line="113" selection-start-column="8" selection-end-line="113" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/.PyCharmCE2019.1/system/python_stubs/-762174762/pygmo/core/pso.py" />
     <entry file="file://$PROJECT_DIR$/Esectiazione_pygmo.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="40">
@@ -651,9 +532,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TestPSO_parameter_by_pygomo.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/TestPSO_parameter_by_pygomo.txt" />
     <entry file="file://C:/Python27/Lib/locale.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -670,115 +549,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/snakeoil.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="77" column="22" lean-forward="true" selection-start-line="77" selection-start-column="22" selection-end-line="77" selection-end-column="22" />
+        <state relative-caret-position="614">
+          <caret line="579" column="40" lean-forward="true" selection-start-line="579" selection-start-column="40" selection-end-line="579" selection-end-column="40" />
           <folding>
             <element signature="e#2684#2697#0" expanded="true" />
-            <element signature="e#3833#5281#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="251" column="18" lean-forward="true" selection-start-line="251" selection-start-column="18" selection-end-line="251" selection-end-column="18" />
-          <folding>
-            <element signature="e#437#3711#0" />
-            <element signature="e#465#574#0" />
-            <element signature="e#608#754#0" />
-            <element signature="e#798#2111#0" />
-            <element signature="e#1104#2039#0" />
-            <element signature="e#1151#1332#0" />
-            <element signature="e#1367#2039#0" />
-            <element signature="e#1403#1584#0" />
-            <element signature="e#1660#1851#0" />
-            <element signature="e#1894#2039#0" />
-            <element signature="e#2916#3118#0" />
-            <element signature="e#3032#3080#0" />
-            <element signature="e#3160#3541#0" />
-            <element signature="e#3310#3503#0" />
-            <element signature="e#3350#3503#0" />
-            <element signature="e#3740#4811#0" />
-            <element signature="e#3806#4262#0" />
-            <element signature="e#4710#4714#0" />
-            <element signature="e#4771#4811#0" />
-            <element signature="e#4814#4872#0" />
-            <element signature="e#6275#8950#0" />
-            <element signature="e#10109#11130#0" />
-            <element signature="e#12910#13266#0" />
-            <element signature="e#13348#13491#0" />
-            <element signature="e#14296#14618#0" />
-            <element signature="e#14652#14791#0" />
-            <element signature="e#14834#14960#0" />
-            <element signature="e#15404#16342#0" />
-            <element signature="e#15738#16044#0" />
-            <element signature="e#15826#16017#0" />
-            <element signature="e#16063#16268#0" />
-            <element signature="e#16087#16268#0" />
-            <element signature="e#16380#16564#0" />
-            <element signature="e#16568#16586#0" />
-            <element signature="e#17318#17660#0" />
-            <element signature="e#18352#18359#0" />
-            <element signature="e#18534#18547#0" />
-            <element signature="e#19746#19753#0" />
-            <element signature="e#21013#21054#0" />
-            <element signature="e#22517#22691#0" />
-            <element signature="e#22588#22661#0" />
-            <element signature="e#22951#22971#0" />
-            <element signature="e#23190#23285#0" />
-            <element signature="e#23328#23479#0" />
-            <element signature="e#23565#23924#0" />
-            <element signature="e#23765#23924#0" />
-            <element signature="e#24002#24183#0" />
-            <element signature="e#24339#24371#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/def_param.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="143" column="18" selection-start-line="143" selection-end-line="143" selection-end-column="18" />
-          <folding>
-            <element signature="e#21#3869#0" />
-            <element signature="e#3888#5990#0" />
-            <element signature="e#6013#7748#0" />
-            <element signature="e#12250#13289#0" />
-            <element signature="e#13299#14489#0" />
-            <element signature="e#14506#14655#0" />
-            <element signature="e#14667#19184#0" />
-            <element signature="e#19190#20987#0" />
-            <element signature="e#20989#21054#0" />
-            <element signature="e#21115#22866#0" />
-            <element signature="e#22928#24671#0" />
-            <element signature="e#24733#26482#0" />
-            <element signature="e#26544#28297#0" />
-            <element signature="e#28359#30113#0" />
-            <element signature="e#30173#31915#0" />
-            <element signature="e#31917#31969#0" />
-            <element signature="e#32032#33782#0" />
-            <element signature="e#33790#35661#0" />
-            <element signature="e#35663#35715#0" />
-            <element signature="e#35776#37528#0" />
-            <element signature="e#37530#37556#0" />
-            <element signature="e#37659#39458#0" />
-            <element signature="e#39460#39486#0" />
-            <element signature="e#39539#41333#0" />
-            <element signature="e#41343#43136#0" />
-            <element signature="e#43146#44939#0" />
-            <element signature="e#44948#46715#0" />
-            <element signature="e#46725#48518#0" />
-            <element signature="e#48520#48569#0" />
-            <element signature="e#48622#50383#0" />
-            <element signature="e#50384#50410#0" />
-            <element signature="e#50493#52526#0" />
-            <element signature="e#52581#54364#0" />
-            <element signature="e#54365#54390#0" />
-            <element signature="e#54524#56318#0" />
-            <element signature="e#56350#58819#0" />
-            <element signature="e#58852#61321#0" />
-            <element signature="e#61353#63788#0" />
           </folding>
         </state>
       </provider>
@@ -848,37 +622,113 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/DistanceDamageFitness_LOG_used_parameters_nGen100_pSize15_circ1_saDESelf-adaptiveDifferentialEvolution0_today5.txt" />
+    <entry file="file://$PROJECT_DIR$/DistanceDamageFitness_LOG_used_parameters_nGen100_pSize15_circ1_PSOParticleSwarmOptimization0_today5.txt" />
+    <entry file="file://$PROJECT_DIR$/DistanceDamageFitness_GenBest_used_parameters_nGen100_pSize15_circ1_PSOParticleSwarmOptimization0_today5.txt" />
+    <entry file="file://$PROJECT_DIR$/DistanceDamageFitness_GenBest_used_parameters_nGen100_pSize15_circ1_saDESelf-adaptiveDifferentialEvolution3_today5.txt" />
+    <entry file="file://$USER_HOME$/Desktop/untitled/logs.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FullFitness_BEST_used_parameters_nGen100_pSize15_circ3_PSOParticleSwarmOptimization1_today6.txt" />
+    <entry file="file://C:/Python27/Lib/site-packages/pygmo/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="387" column="40" lean-forward="true" selection-start-line="387" selection-start-column="40" selection-end-line="387" selection-end-column="40" />
+          <folding>
+            <element signature="e#1081#1126#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PSO2_FullFit_5T_C1.txt" />
+    <entry file="file://$PROJECT_DIR$/PSO12_FullFit_5T_C1_BoundAvg_BEST_used_parameters_nGen100_pSize15_circ1_PSOParticleSwarmOptimization10_today12.txt" />
+    <entry file="file://$PROJECT_DIR$/PSO12_FullFit_5T_C1_BoundAvg_BEST_used_parameters_nGen100_pSize15_circ1_PSOParticleSwarmOptimization4_today12.txt" />
+    <entry file="file://$PROJECT_DIR$/PSO12_FullFit_5T_C1_BoundAvg_LOG_used_parameters_nGen100_pSize15_circ1_PSOParticleSwarmOptimization0_today12.txt" />
+    <entry file="file://$PROJECT_DIR$/PSO12_FullFit_5T_C1_BoundAvg_GenBest_used_parameters_nGen100_pSize15_circ1_PSOParticleSwarmOptimization4_today12.txt" />
+    <entry file="file://$PROJECT_DIR$/PSO12_FullFit_5T_C1_BoundAvg_GenBest_used_parameters_nGen100_pSize15_circ1_PSOParticleSwarmOptimization10_today12.txt" />
+    <entry file="file://$USER_HOME$/Desktop/untitled/fitnessplot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="47" column="29" selection-start-line="47" selection-start-column="29" selection-end-line="47" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dictionaries.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="98" column="26" selection-start-line="98" selection-start-column="26" selection-end-line="98" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+            <element signature="e#76002#76991#0" />
+            <element signature="e#77007#78029#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/def_param.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="924" column="806" selection-start-line="924" selection-start-column="806" selection-end-line="924" selection-end-column="806" />
+          <folding>
+            <element signature="e#21#3869#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ServerTorcs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
+        <state relative-caret-position="289">
+          <caret line="17" column="29" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RunSADE.py">
+    <entry file="file://$PROJECT_DIR$/client.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="96" column="10" selection-start-line="96" selection-start-column="10" selection-end-line="96" selection-end-column="10" />
+        <state relative-caret-position="264">
+          <caret line="896" column="13" selection-start-line="896" selection-start-column="13" selection-end-line="896" selection-end-column="13" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#437#3714#0" />
+            <element signature="e#465#574#0" />
+            <element signature="e#608#754#0" />
+            <element signature="e#3743#4815#0" />
+            <element signature="e#4879#6091#0" />
+            <element signature="e#6094#6152#0" />
+            <element signature="e#7419#7535#0" />
+            <element signature="e#7575#10215#0" />
+            <element signature="e#11158#11230#0" />
+            <element signature="e#11267#11359#0" />
+            <element signature="e#11414#12435#0" />
+            <element signature="e#25309#27017#1" />
+            <element signature="e#32419#34322#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/problems.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="309" column="103" selection-start-line="309" selection-start-column="103" selection-end-line="309" selection-end-column="103" />
+        <state relative-caret-position="186">
+          <caret line="55" selection-start-line="55" selection-end-line="55" />
           <folding>
-            <element signature="e#0#13#0" expanded="true" />
-            <element signature="e#166#368#0" />
-            <element signature="e#420#473#0" />
-            <element signature="e#521#690#0" />
-            <element signature="e#1688#2394#0" />
-            <element signature="e#3733#3757#0" />
+            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#4998#5013#0" />
+            <element signature="e#8734#14514#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RunSADE.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="55">
+          <caret line="161" column="24" selection-start-line="161" selection-start-column="24" selection-end-line="161" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#3261#3337#0" />
           </folding>
         </state>
       </provider>

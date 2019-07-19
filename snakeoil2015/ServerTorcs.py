@@ -8,11 +8,11 @@ class ServerTorcs(Thread):
         self.port = port
 
     def run(self):
-        os.chdir('C:\\Users\\alex\\Desktop\\torcs' + str(self.port))
+        os.chdir('C:\\Users\\Vincenzo\\Desktop\\torcs' + str(self.port))
         #print "SERVER",time.time()
         os.system('wtorcs.exe -t 1000000000 >NUL')
 
 
 if __name__ == "__main__":
-    os.chdir(r'C:\Users\alex\Desktop\torcs3005')
+    os.chdir(r'C:\Users\Vincenzo\Desktop\torcs3005')
     os.system('wtorcs.exe -t 1000000000')
